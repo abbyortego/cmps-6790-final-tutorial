@@ -7533,6 +7533,7 @@ a.anchor-link {
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">regex</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">re</span>
 </pre></div>
 </div>
 </div>
@@ -7620,14 +7621,14 @@ a.anchor-link {
 <p>MTGTop8 offers a lot of data on it's site and not all of it is relevant to predicting deck winability. Due to this, we'll focus on only a subset of tournaments and their features.</p>
 <ul>
 <li>Standard Tournament Format<ul>
-<li>MTG was released in August 1993 and has tournaments hosted around the globe. This has lead to the evolution of a variety of play formats. In this notebook we will be exploring decks played in standard formatted tournaments.</li>
+<li>MTG was released in August 1993 and has tournaments hosted around the globe. This has lead to the evolution of a variety of play formats. We will be exploring decks played in standard formatted tournaments.</li>
 <li>The standard format is very popular and constrains deck construction to be only from cards released within the last 2-3 years.</li>
 <li>By selecting this format, we can avoid the possibility of more recent decks with new fancy abilities overpowering older decks and some aspects of the experience gap that can exist between players.</li>
 </ul>
 </li>
 <li>Major Events<ul>
 <li>Even though web scraping is not banned by this site, it's still important to be mindful of the number of queries issued. Due to this, we will only be querying data from tournaments listed as "major events".</li>
-<li>They're not as common but have a high turn out which will still produce a large dataset of decks with fewer queries.</li>
+<li>They're not as common but have a high turn out which will still produce a reliable and large deck dataset with fewer queries.</li>
 </ul>
 </li>
 <li>Within the Last Full Month (January 2026 at the time of submission)<ul>
@@ -7709,7 +7710,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># get all tournaments tables</span>
@@ -7786,6 +7787,143 @@ a.anchor-link {
 &lt;/tr&gt;
 
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f12f0452">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now that we have the tournament tables, we can extract the information we're interested in from the html. We're looking for...</p>
+<ol>
+<li>Tournament Names (to identify tournaments) and Dates (to grab recent tournaments)<ul>
+<li>These are stored as text within the html tags, so we can use BeautifulSoup's <code>get_text()</code> method to extract this information from the table.</li>
+<li>When you do you get a string that looks like this: <code>'\n\n\nRCQ @ Draco Hobby Center (Bogota, Colombia)\n\n01/02/26\n\n\n\nMTGO RC Super Qualifier\n\n01/02/26\n\n\n\n2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Richmond, VA)\n\n31/01/26\n\n\n\n</code></li>
+<li>It's not very pretty but the new line characters do have a pattern! 3-4 new line characters separate tournaments and 2 new line characters separate tournament name from date. We can use regex to parse the string using this pattern.</li>
+</ul>
+</li>
+<li>Links to Additional Tournament Information (grab more details later)<ul>
+<li>These are stored in <code>a</code> tags with an <code>href</code> property</li>
+<li>Some entries in the table record an additional <code>a</code> tag with the <code>class</code> property specified in addition to <code>href</code>. These tags have duplicate information that we don't need.</li>
+<li>We can use BeautifulSoup's <code>find_all()</code> method to find all <code>a</code> tags that have an <code>href</code> property specified but no <code>class</code> property.- Lastly, we can use the <code>get()</code> method to extract the links.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4b765362">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># lists to store data</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">links</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">tournaments_table</span> <span class="ow">in</span> <span class="n">tournaments_tables</span><span class="p">:</span>
+    <span class="c1"># (1) Tournament Names and Date</span>
+    <span class="n">table_text</span> <span class="o">=</span> <span class="n">tournaments_table</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+    <span class="c1"># regex pattern: 3-4 '\n' (non-captured) followed by a tournament name then 2 '\n' (non-captured) followed by a date</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s2">"(?:\n){3,4}(?P&lt;name&gt;.+)(?:\n)</span><span class="si">{2}</span><span class="s2">(?P&lt;date&gt;.+)"</span><span class="p">,</span> <span class="n">table_text</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'name'</span><span class="p">))</span>
+        <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'date'</span><span class="p">))</span>
+    <span class="c1">#</span>
+
+    <span class="c1"># (2) Links to Additional Tournament Information</span>
+    <span class="n">table_hrefs</span> <span class="o">=</span> <span class="n">tournaments_table</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>      <span class="c1"># find all 'a' tags with an 'href' but no 'class'</span>
+    <span class="n">links</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">table_href</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span> <span class="k">for</span> <span class="n">table_href</span> <span class="ow">in</span> <span class="n">table_hrefs</span><span class="p">])</span>        <span class="c1"># get the 'href'</span>
+<span class="c1">#</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">names</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">dates</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">links</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>['Champions Cup Store Qualifier @ Machida (Japan) NEW',
+ 'MTGO Challenge 64 NEW',
+ 'Sunday ReCQ #2 @ SCG CON Milwaukee NEW',
+ 'Sunday RCQ #1 @ SCG CON Milwaukee NEW',
+ 'MTGO Challenge 32 NEW']</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>['23/02/26', '23/02/26', '22/02/26', '22/02/26', '22/02/26']</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>['event?e=81001&amp;f=ST',
+ 'event?e=80924&amp;f=ST',
+ 'event?e=80950&amp;f=ST',
+ 'event?e=80949&amp;f=ST',
+ 'event?e=80864&amp;f=ST']</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ad60d57f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s1">'(?:</span><span class="se">\\</span><span class="s1">n){3,4}(?P&lt;name&gt;[^</span><span class="se">\\</span><span class="s1">]+)(?:</span><span class="se">\\</span><span class="s1">n)</span><span class="si">{2}</span><span class="s1">(?P&lt;date&gt;[^</span><span class="se">\\</span><span class="s1">]+)'</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nChampions Cup Store Qualifier @ Machida (Japan) NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n23/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nMTGO Challenge 64 NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n23/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nSunday ReCQ #2 @ SCG CON Milwaukee NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n22/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nSunday RCQ #1 @ SCG CON Milwaukee NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n22/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nMTGO Challenge 32 NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n22/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nSaturday RCQ #2 @ SCG CON Milwaukee NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nSaturday RCQ #1 @ SCG CON Milwaukee NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nMont RCQ @ Mont CardShop (Campinas, Brazil) NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nRegional Championship @ F2FTour.com (Vancouver, Canada) NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nRegional Championship @ SCG CON Milwaukee NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nArena Championship 11 @ Wizards of the Coast NEW</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nMTGO Challenge 32</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nMTGO Challenge 32</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n21/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nFriday LCQ #16 @ SCG CON Milwaukee</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n20/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nFriday LCQ #15 @ SCG CON Milwaukee</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n20/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nFriday LCQ #13 @ SCG CON Milwaukee</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n20/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nFriday LCQ #14 @ SCG CON Milwaukee</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n20/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nFriday LCQ #12 @ SCG CON Milwaukee</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n20/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nFriday LCQ #11 @ SCG CON Milwaukee</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n20/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nFriday LCQ #10 @ SCG CON Milwaukee</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n20/02/26</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">n"</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[36]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>[&lt;re.Match object; span=(0, 69), match='\\n\\n\\nChampions Cup Store Qualifier @ Machida &gt;,
+ &lt;re.Match object; span=(69, 110), match='\\n\\n\\n\\nMTGO Challenge 64 NEW\\n\\n23/02/26'&gt;,
+ &lt;re.Match object; span=(110, 168), match='\\n\\n\\n\\nSunday ReCQ #2 @ SCG CON Milwaukee NE&gt;,
+ &lt;re.Match object; span=(168, 225), match='\\n\\n\\n\\nSunday RCQ #1 @ SCG CON Milwaukee NEW&gt;,
+ &lt;re.Match object; span=(225, 266), match='\\n\\n\\n\\nMTGO Challenge 32 NEW\\n\\n22/02/26'&gt;,
+ &lt;re.Match object; span=(266, 325), match='\\n\\n\\n\\nSaturday RCQ #2 @ SCG CON Milwaukee N&gt;,
+ &lt;re.Match object; span=(325, 384), match='\\n\\n\\n\\nSaturday RCQ #1 @ SCG CON Milwaukee N&gt;,
+ &lt;re.Match object; span=(384, 451), match='\\n\\n\\n\\nMont RCQ @ Mont CardShop (Campinas, B&gt;,
+ &lt;re.Match object; span=(451, 530), match='\\n\\n\\n\\nRegional Championship @ F2FTour.com (&gt;,
+ &lt;re.Match object; span=(530, 595), match='\\n\\n\\n\\nRegional Championship @ SCG CON Milwa&gt;,
+ &lt;re.Match object; span=(595, 663), match='\\n\\n\\n\\nArena Championship 11 @ Wizards of th&gt;,
+ &lt;re.Match object; span=(663, 700), match='\\n\\n\\n\\nMTGO Challenge 32\\n\\n21/02/26'&gt;,
+ &lt;re.Match object; span=(700, 737), match='\\n\\n\\n\\nMTGO Challenge 32\\n\\n21/02/26'&gt;,
+ &lt;re.Match object; span=(737, 791), match='\\n\\n\\n\\nFriday LCQ #16 @ SCG CON Milwaukee\\n&gt;,
+ &lt;re.Match object; span=(791, 845), match='\\n\\n\\n\\nFriday LCQ #15 @ SCG CON Milwaukee\\n&gt;,
+ &lt;re.Match object; span=(845, 899), match='\\n\\n\\n\\nFriday LCQ #13 @ SCG CON Milwaukee\\n&gt;,
+ &lt;re.Match object; span=(899, 953), match='\\n\\n\\n\\nFriday LCQ #14 @ SCG CON Milwaukee\\n&gt;,
+ &lt;re.Match object; span=(953, 1007), match='\\n\\n\\n\\nFriday LCQ #12 @ SCG CON Milwaukee\\n&gt;,
+ &lt;re.Match object; span=(1007, 1061), match='\\n\\n\\n\\nFriday LCQ #11 @ SCG CON Milwaukee\\n&gt;,
+ &lt;re.Match object; span=(1061, 1115), match='\\n\\n\\n\\nFriday LCQ #10 @ SCG CON Milwaukee\\n&gt;]</pre>
 </div>
 </div>
 </div>
@@ -7998,7 +8136,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>/Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.ipynb
@@ -8015,7 +8153,7 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>[NbConvertApp] Converting notebook /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.ipynb to html
-[NbConvertApp] Writing 308802 bytes to /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.html
+[NbConvertApp] Writing 298306 bytes to /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.html
 </pre>
 </div>
 </div>
