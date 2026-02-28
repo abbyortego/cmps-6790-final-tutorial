@@ -7528,11 +7528,15 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [250]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">regex</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -7620,14 +7624,14 @@ a.anchor-link {
 <p>MTGTop8 offers a lot of data on it's site and not all of it is relevant to predicting deck winability. Due to this, we'll focus on only a subset of tournaments and their features.</p>
 <ul>
 <li>Standard Tournament Format<ul>
-<li>MTG was released in August 1993 and has tournaments hosted around the globe. This has lead to the evolution of a variety of play formats. In this notebook we will be exploring decks played in standard formatted tournaments.</li>
+<li>MTG was released in August 1993 and has tournaments hosted around the globe. This has lead to the evolution of a variety of play formats. We will be exploring decks played in standard formatted tournaments.</li>
 <li>The standard format is very popular and constrains deck construction to be only from cards released within the last 2-3 years.</li>
 <li>By selecting this format, we can avoid the possibility of more recent decks with new fancy abilities overpowering older decks and some aspects of the experience gap that can exist between players.</li>
 </ul>
 </li>
 <li>Major Events<ul>
 <li>Even though web scraping is not banned by this site, it's still important to be mindful of the number of queries issued. Due to this, we will only be querying data from tournaments listed as "major events".</li>
-<li>They're not as common but have a high turn out which will still produce a large dataset of decks with fewer queries.</li>
+<li>They're not as common but have a high turn out which will still produce a reliable and large deck dataset with fewer queries.</li>
 </ul>
 </li>
 <li>Within the Last Full Month (January 2026 at the time of submission)<ul>
@@ -7689,7 +7693,7 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Extracting">Extracting<a class="anchor-link" href="#Extracting">¶</a></h3>
+<h3 id="Extracting-Tournaments">Extracting Tournaments<a class="anchor-link" href="#Extracting-Tournaments">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7709,7 +7713,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># get all tournaments tables</span>
@@ -7746,11 +7750,11 @@ a.anchor-link {
   &lt;img height="17" src="/graph/online/paper.png" title="Paper"/&gt;
  &lt;/td&gt;
  &lt;td class="S14" width="70%"&gt;
-  &lt;a href="event?e=80795&amp;amp;f=ST"&gt;
-   Friday LCQ #9
+  &lt;a href="event?e=80805&amp;amp;f=ST"&gt;
+   Friday LCQ #11
   &lt;/a&gt;
   @
-  &lt;a class="und" href="event?e=80795&amp;amp;f=ST"&gt;
+  &lt;a class="und" href="event?e=80805&amp;amp;f=ST"&gt;
    SCG CON Milwaukee
   &lt;/a&gt;
  &lt;/td&gt;
@@ -7768,11 +7772,11 @@ a.anchor-link {
   &lt;img height="17" src="/graph/online/paper.png" title="Paper"/&gt;
  &lt;/td&gt;
  &lt;td class="S14" width="70%"&gt;
-  &lt;a href="event?e=80801&amp;amp;f=ST"&gt;
-   Friday LCQ #8
+  &lt;a href="event?e=80793&amp;amp;f=ST"&gt;
+   Friday LCQ #10
   &lt;/a&gt;
   @
-  &lt;a class="und" href="event?e=80801&amp;amp;f=ST"&gt;
+  &lt;a class="und" href="event?e=80793&amp;amp;f=ST"&gt;
    SCG CON Milwaukee
   &lt;/a&gt;
  &lt;/td&gt;
@@ -7791,13 +7795,212 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f12f0452">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Now that we have the tournament tables, we can extract the information we're interested in from the html. We're looking for...</p>
+<ol>
+<li>Tournament Names (to identify tournaments) and Dates (to grab recent tournaments)<ul>
+<li>These are stored as text within the html tags, so we can use BeautifulSoup's <code>get_text()</code> method to extract this information from the table.</li>
+<li>When you do you get a string that looks like this: <code>'\n\n\nRCQ @ Draco Hobby Center (Bogota, Colombia)\n\n01/02/26\n\n\n\nMTGO RC Super Qualifier\n\n01/02/26\n\n\n\n2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Richmond, VA)\n\n31/01/26\n\n\n\n</code></li>
+<li>It's not very pretty but the new line characters do have a pattern! 3-4 new line characters separate tournaments and 2 new line characters separate tournament name from date. We can use regex to parse the string using this pattern.</li>
+</ul>
+</li>
+<li>Links to Additional Tournament Information (grab more details later)<ul>
+<li>These are stored in <code>a</code> tags with an <code>href</code> property</li>
+<li>Some entries in the table record an additional <code>a</code> tag with the <code>class</code> property specified in addition to <code>href</code>. These tags have duplicate information that we don't need.</li>
+<li>We can use BeautifulSoup's <code>find_all()</code> method to find all <code>a</code> tags that have an <code>href</code> property specified but no <code>class</code> property.- Lastly, we can use the <code>get()</code> method to extract the links.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4b765362">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># lists to store data</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">links</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">tournaments_table</span> <span class="ow">in</span> <span class="n">tournaments_tables</span><span class="p">:</span>
+    <span class="c1"># (1) Tournament Names and Date</span>
+    <span class="n">table_text</span> <span class="o">=</span> <span class="n">tournaments_table</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="sa">r</span><span class="s2">"""</span>
+<span class="s2">        (?:\n){3,4}(?P&lt;name&gt;.+)         # 3-4 '\n' (non-captured) followed by a tournament name</span>
+<span class="s2">        (?:\n)</span><span class="si">{2}</span><span class="s2">(?P&lt;date&gt;.+)       # 2 '\n' (non-captured) followed by a date</span>
+<span class="s2">        """</span><span class="p">,</span> 
+        <span class="n">table_text</span><span class="p">,</span> 
+        <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span>      <span class="c1"># for multiline to support comments!</span>
+    <span class="p">)</span>  
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+        <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'name'</span><span class="p">))</span>
+        <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">'date'</span><span class="p">))</span>
+    <span class="c1">#</span>
+
+    <span class="c1"># (2) Links to Additional Tournament Information</span>
+    <span class="n">table_hrefs</span> <span class="o">=</span> <span class="n">tournaments_table</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>      <span class="c1"># find all 'a' tags with an 'href' but no 'class'</span>
+    <span class="n">links</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">table_href</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span> <span class="k">for</span> <span class="n">table_href</span> <span class="ow">in</span> <span class="n">table_hrefs</span><span class="p">])</span>        <span class="c1"># get the link</span>
+<span class="c1">#</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">names</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">dates</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span> <span class="n">links</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>['MTGO Challenge 32 NEW',
+ 'MTGO Challenge 64 NEW',
+ 'Champions Cup Store Qualifier @ Machida (Japan) NEW',
+ 'MTGO Challenge 64',
+ 'Sunday ReCQ #2 @ SCG CON Milwaukee NEW']</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>['26/02/26', '24/02/26', '23/02/26', '23/02/26', '22/02/26']</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>['event?e=81053&amp;f=ST',
+ 'event?e=81055&amp;f=ST',
+ 'event?e=81001&amp;f=ST',
+ 'event?e=80924&amp;f=ST',
+ 'event?e=80950&amp;f=ST']</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=02139fe0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Finally, we can store this information into a pandas dataframe!</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ed853426">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Names'</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span> <span class="s1">'Dates'</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">'Links'</span><span class="p">:</span> <span class="n">links</span><span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Date</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>MTGO Challenge 32 NEW</td>
+<td>26/02/26</td>
+<td>event?e=81053&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>MTGO Challenge 64 NEW</td>
+<td>24/02/26</td>
+<td>event?e=81055&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Champions Cup Store Qualifier @ Machida (Japan...</td>
+<td>23/02/26</td>
+<td>event?e=81001&amp;f=ST</td>
+</tr>
+<tr>
+<th>3</th>
+<td>MTGO Challenge 64</td>
+<td>23/02/26</td>
+<td>event?e=80924&amp;f=ST</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Sunday ReCQ #2 @ SCG CON Milwaukee NEW</td>
+<td>22/02/26</td>
+<td>event?e=80950&amp;f=ST</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Name    str
+Date    str
+Link    str
+dtype: object</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0d5dc76e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Transforming">Transforming<a class="anchor-link" href="#Transforming">¶</a></h3>
+<h3 id="Transforming-Tournaments-Table">Transforming Tournaments Table<a class="anchor-link" href="#Transforming-Tournaments-Table">¶</a></h3>
 </div>
 </div>
 </div>
@@ -7808,18 +8011,965 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>This is very close to what we're interested in retrieving as detailed in the <a href="#dataset">Dataset</a> section, but a few adjustements are still required.</p>
+<p>The dataframe we got in the <a href="#extracting-tournaments">Extracting</a> section above is very close to what we're interested in retrieving as detailed in the <a href="#dataset">Dataset</a> section, but a few adjustments are still required.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=72185e3a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=19cb2993">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Loading">Loading<a class="anchor-link" href="#Loading">¶</a></h3>
+<ol>
+<li>No online tournaments</li>
+</ol>
+<p>Some of these tournaments include MTG games played online in the app which has a similar but alternative system for collecting cards and creating decks. Due to this we want to only look at tournaments played in person. Thankfully, these online tournaments are denoted with "MTGO" so we can filter the <code>Name</code> property of the <code>tournaments_df</code> to only include tournaments without "MTGO" in the name.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3e6e1b28">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [162]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># boolean mask of tournament names that do not include MTGO</span>
+<span class="n">not_online</span> <span class="o">=</span> <span class="o">~</span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">"MTGO"</span><span class="p">)</span>       
+<span class="n">all_tournaments_df</span> <span class="o">=</span> <span class="n">all_tournaments_df</span><span class="p">[</span><span class="n">not_online</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>      <span class="c1"># only in person tournaments!</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Date</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>Champions Cup Store Qualifier @ Machida (Japan...</td>
+<td>23/02/26</td>
+<td>event?e=81001&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Sunday ReCQ #2 @ SCG CON Milwaukee NEW</td>
+<td>22/02/26</td>
+<td>event?e=80950&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Sunday RCQ #1 @ SCG CON Milwaukee NEW</td>
+<td>22/02/26</td>
+<td>event?e=80949&amp;f=ST</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Saturday RCQ #2 @ SCG CON Milwaukee</td>
+<td>21/02/26</td>
+<td>event?e=80908&amp;f=ST</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Saturday RCQ #1 @ SCG CON Milwaukee</td>
+<td>21/02/26</td>
+<td>event?e=80907&amp;f=ST</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3d5348d9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="2">
+<li>Recent Tournaments</li>
+</ol>
+<p>This dataframe contains tournaments from the last <strong>2</strong> months, we are only concerned with tournaments that occurred in the last full month (January 2026). We'll filter out tournaments from before or after that time and convert our <code>Date</code> column in the pandas dataframe to the proper type (datetime) to do this.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5c884ea0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [163]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%y"</span><span class="p">)</span>      <span class="c1"># format to datetime</span>
+<span class="c1"># boolean mask of rows between the start &amp; end of January</span>
+<span class="n">in_january</span> <span class="o">=</span> <span class="p">(</span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s1">'2026-01-01'</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="s1">'2026-02-01'</span><span class="p">)</span>         
+<span class="n">all_tournaments_df</span> <span class="o">=</span> <span class="n">all_tournaments_df</span><span class="p">[</span><span class="n">in_january</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>      <span class="c1"># only in January!</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Date</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Ric...</td>
+<td>2026-01-31</td>
+<td>event?e=79854&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Champions Cup Special Qualifier @ Kawasaki (Ja...</td>
+<td>2026-01-30</td>
+<td>event?e=79785&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Pro Tour Lorwyn Eclipsed @ Richmond</td>
+<td>2026-01-30</td>
+<td>event?e=79746&amp;f=ST</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Saturday ReCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>event?e=79664&amp;f=ST</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Super Sunday RCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>event?e=79600&amp;f=ST</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f282a26d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="3">
+<li>Base URL for the Link</li>
+</ol>
+<p>The <code>Link</code> we extracted contains only the suffix of the URL. We need to append the base URL ("<a href="https://mtgtop8.com">https://mtgtop8.com</a>") to this column for easy access later.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ab60a7d3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [164]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">base_url</span> <span class="o">=</span> <span class="s2">"https://mtgtop8.com"</span>
+<span class="c1"># concatenate the base URL string with a '/' then the suffix</span>
+<span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Link"</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_url</span> <span class="o">+</span> <span class="s1">'/'</span> <span class="o">+</span> <span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Link"</span><span class="p">]</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>      <span class="c1"># proper links!</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Date</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Ric...</td>
+<td>2026-01-31</td>
+<td>https://mtgtop8.com/event?e=79854&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Champions Cup Special Qualifier @ Kawasaki (Ja...</td>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79785&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Pro Tour Lorwyn Eclipsed @ Richmond</td>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79746&amp;f=ST</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Saturday ReCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79664&amp;f=ST</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Super Sunday RCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79600&amp;f=ST</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c032252a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="4">
+<li>Overloaded Name Column</li>
+</ol>
+<p>The tournament name is storing a lot of information (e.g., day, actual name, and convention). We can use regex to separate the values into their own columns.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=242d6715">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [165]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[165]:</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Date</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Ric...</td>
+<td>2026-01-31</td>
+<td>https://mtgtop8.com/event?e=79854&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Champions Cup Special Qualifier @ Kawasaki (Ja...</td>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79785&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Pro Tour Lorwyn Eclipsed @ Richmond</td>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79746&amp;f=ST</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Saturday ReCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79664&amp;f=ST</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Super Sunday RCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79600&amp;f=ST</td>
+</tr>
+<tr>
+<th>5</th>
+<td>Super Sunday RCQ #1 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79599&amp;f=ST</td>
+</tr>
+<tr>
+<th>6</th>
+<td>Izzet Explosive Experiment Event</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79598&amp;f=ST</td>
+</tr>
+<tr>
+<th>7</th>
+<td>Regional Championship @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79462&amp;f=ST</td>
+</tr>
+<tr>
+<th>8</th>
+<td>Saturday RCQ @ SCG CON Portland</td>
+<td>2026-01-24</td>
+<td>https://mtgtop8.com/event?e=79569&amp;f=ST</td>
+</tr>
+<tr>
+<th>9</th>
+<td>RCQ @ BB-Spiele (Rosenheim, Germany)</td>
+<td>2026-01-24</td>
+<td>https://mtgtop8.com/event?e=79428&amp;f=ST</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=23ed1199">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [166]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">unloaded_name_col</span> <span class="o">=</span> <span class="n">all_tournaments_df</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">"""</span>
+<span class="s2">    (?:Monday\s|Tuesday\s|Wednesday\s|Thursday\s|Friday\s|Saturday\s|Sunday\s)?         # non-capture the day</span>
+<span class="s2">    (?P&lt;Name&gt;[^@]+)         # capture everything up until the @ symbol</span>
+<span class="s2">    (?:@)?      # non-capture the @ symbol, if it exists (indicated with ?)</span>
+<span class="s2">    (?P&lt;Convention&gt;.+)?         # capture convention, if it exists (indicated with ?)</span>
+<span class="s2">    """</span><span class="p">,</span>
+    <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">unloaded_name_col</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name</th>
+<th>Convention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2nd Chance PTQ</td>
+<td>Pro Tour Lorwyn Eclipsed (Richmond, VA)</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Champions Cup Special Qualifier</td>
+<td>Kawasaki (Japan)</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Pro Tour Lorwyn Eclipsed</td>
+<td>Richmond</td>
+</tr>
+<tr>
+<th>3</th>
+<td>ReCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Super Sunday RCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>5</th>
+<td>Super Sunday RCQ #1</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>6</th>
+<td>Izzet Explosive Experiment Event</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>7</th>
+<td>Regional Championship</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>8</th>
+<td>RCQ</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>9</th>
+<td>RCQ</td>
+<td>BB-Spiele (Rosenheim, Germany)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=cc368050">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [167]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># inner join the two dataframes on their index columns</span>
+<span class="n">all_tournaments_df</span> <span class="o">=</span> <span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">unloaded_name_col</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Name_x</th>
+<th>Date</th>
+<th>Link</th>
+<th>Name_y</th>
+<th>Convention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Ric...</td>
+<td>2026-01-31</td>
+<td>https://mtgtop8.com/event?e=79854&amp;f=ST</td>
+<td>2nd Chance PTQ</td>
+<td>Pro Tour Lorwyn Eclipsed (Richmond, VA)</td>
+</tr>
+<tr>
+<th>1</th>
+<td>Champions Cup Special Qualifier @ Kawasaki (Ja...</td>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79785&amp;f=ST</td>
+<td>Champions Cup Special Qualifier</td>
+<td>Kawasaki (Japan)</td>
+</tr>
+<tr>
+<th>2</th>
+<td>Pro Tour Lorwyn Eclipsed @ Richmond</td>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79746&amp;f=ST</td>
+<td>Pro Tour Lorwyn Eclipsed</td>
+<td>Richmond</td>
+</tr>
+<tr>
+<th>3</th>
+<td>Saturday ReCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79664&amp;f=ST</td>
+<td>ReCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>4</th>
+<td>Super Sunday RCQ #2 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79600&amp;f=ST</td>
+<td>Super Sunday RCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>5</th>
+<td>Super Sunday RCQ #1 @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79599&amp;f=ST</td>
+<td>Super Sunday RCQ #1</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>6</th>
+<td>Izzet Explosive Experiment Event</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79598&amp;f=ST</td>
+<td>Izzet Explosive Experiment Event</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>7</th>
+<td>Regional Championship @ SCG CON Portland</td>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79462&amp;f=ST</td>
+<td>Regional Championship</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>8</th>
+<td>Saturday RCQ @ SCG CON Portland</td>
+<td>2026-01-24</td>
+<td>https://mtgtop8.com/event?e=79569&amp;f=ST</td>
+<td>RCQ</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>9</th>
+<td>RCQ @ BB-Spiele (Rosenheim, Germany)</td>
+<td>2026-01-24</td>
+<td>https://mtgtop8.com/event?e=79428&amp;f=ST</td>
+<td>RCQ</td>
+<td>BB-Spiele (Rosenheim, Germany)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a411e5d6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Since both dataframes had a <code>Name</code> column, the merge produces <code>Name_x</code>, our old overloaded column, and <code>Name_y</code>, our new unloaded column. We no longer need <code>Name_x</code> so we can drop it.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7a4ceff3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [168]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'Name_x'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"Name_y"</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Date</th>
+<th>Link</th>
+<th>Name</th>
+<th>Convention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2026-01-31</td>
+<td>https://mtgtop8.com/event?e=79854&amp;f=ST</td>
+<td>2nd Chance PTQ</td>
+<td>Pro Tour Lorwyn Eclipsed (Richmond, VA)</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79785&amp;f=ST</td>
+<td>Champions Cup Special Qualifier</td>
+<td>Kawasaki (Japan)</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79746&amp;f=ST</td>
+<td>Pro Tour Lorwyn Eclipsed</td>
+<td>Richmond</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79664&amp;f=ST</td>
+<td>ReCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79600&amp;f=ST</td>
+<td>Super Sunday RCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>5</th>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79599&amp;f=ST</td>
+<td>Super Sunday RCQ #1</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>6</th>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79598&amp;f=ST</td>
+<td>Izzet Explosive Experiment Event</td>
+<td>NaN</td>
+</tr>
+<tr>
+<th>7</th>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79462&amp;f=ST</td>
+<td>Regional Championship</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>8</th>
+<td>2026-01-24</td>
+<td>https://mtgtop8.com/event?e=79569&amp;f=ST</td>
+<td>RCQ</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>9</th>
+<td>2026-01-24</td>
+<td>https://mtgtop8.com/event?e=79428&amp;f=ST</td>
+<td>RCQ</td>
+<td>BB-Spiele (Rosenheim, Germany)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7a2538ce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<ol start="5">
+<li>Datatypes?</li>
+</ol>
+<p>The last thing left to check is the data types for each of these columns and ensure they're right.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=8efd4051">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [169]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Date          datetime64[us]
+Link                     str
+Name                     str
+Convention               str
+dtype: object</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d9a149c4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>They are! We're left with the final tournament data frame below.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=09edfc92">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [170]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Date</th>
+<th>Link</th>
+<th>Name</th>
+<th>Convention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2026-01-31</td>
+<td>https://mtgtop8.com/event?e=79854&amp;f=ST</td>
+<td>2nd Chance PTQ</td>
+<td>Pro Tour Lorwyn Eclipsed (Richmond, VA)</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79785&amp;f=ST</td>
+<td>Champions Cup Special Qualifier</td>
+<td>Kawasaki (Japan)</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2026-01-30</td>
+<td>https://mtgtop8.com/event?e=79746&amp;f=ST</td>
+<td>Pro Tour Lorwyn Eclipsed</td>
+<td>Richmond</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79664&amp;f=ST</td>
+<td>ReCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2026-01-25</td>
+<td>https://mtgtop8.com/event?e=79600&amp;f=ST</td>
+<td>Super Sunday RCQ #2</td>
+<td>SCG CON Portland</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Date          datetime64[us]
+Link                     str
+Name                     str
+Convention               str
+dtype: object</pre>
+</div>
 </div>
 </div>
 </div>
@@ -7841,7 +8991,296 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Extracting">Extracting<a class="anchor-link" href="#Extracting">¶</a></h3>
+<h3 id="Extracting-Decks">Extracting Decks<a class="anchor-link" href="#Extracting-Decks">¶</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fb1583cc">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The <code>Link</code> column in the tournament table leads to a <a href="https://mtgtop8.com/event?e=79854&amp;f=ST">tournament page</a> with player and deck information listed in the order of their rank for the competition outcome. We'll be focusing on extracting that data! Using the <code>Links</code> column in the dataframe we created above, we'll grab the html from each tournament page. With this html we'll extract the rank, deck, and current deck market value for each player in each tournament.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=aa376ded">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">tournaments_html</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># get all tournament pages</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'Link'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>        <span class="c1"># checks status code just in case we run into issues</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Could not scrape </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span><span class="si">}</span><span class="s2"> details from </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'Link'</span><span class="p">]</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+        <span class="k">continue</span>
+    <span class="c1">#</span>
+
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>         <span class="c1"># using soup to grab the html</span>
+    <span class="n">tournaments_html</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">soup</span><span class="p">)</span>
+<span class="c1">#</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tournaments_html</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">prettify</span><span class="p">())[:</span><span class="mi">500</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>&lt;!DOCTYPE HTML&gt;
+&lt;html lang="en"&gt;
+ &lt;head&gt;
+  &lt;title&gt;
+   Standard event - 2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Richmond, VA) @ mtgtop8.com
+  &lt;/title&gt;
+  &lt;link href="https://www.mtgtop8.com/graph/favicon.png" rel="icon" type="image/png"/&gt;
+  &lt;link href="/styles.css" rel="stylesheet" type="text/css"/&gt;
+  &lt;script src="https://cache.consentframework.com/js/pa/39346/c/PMQm4/stub" type="text/javascript"&gt;
+  &lt;/script&gt;
+  &lt;script async="" src="https://choices.consentframework.com/js/pa/39346/c/PMQm4/cmp" 
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2b0b8225">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>When handling the tournament HTML, we'll be looking for the following information...</p>
+<ol>
+<li><p><strong>Players &amp; Rank</strong> are determined based on the order players are extracted in.</p>
+<ul>
+<li>MTG Top 8 list players in the left hand panel in order of rank, so we just need to scrape this list.</li>
+<li>Unforunately, players aren't wrapped in a convenient table like tournaments were, but they are wrapped in an <code>a</code> tag with the <code>class</code> name: "player".</li>
+<li>Also, for <a href="https://mtgtop8.com/event?e=79746&amp;f=ST">really large tournaments</a> the side panel is divided into a "Top 8" and "Best Decks" categories where the pattern above is duplicated in both. We only want to extract <code>a</code> tags with <code>class</code> "player" in the "Top 8" list. Thankfully, a <code>div</code> with an <code>id</code>, "top8_list" wraps this panel <em>if it exists</em>. Using BeautifulSoup's <code>find()</code> method, we can try to get the "top8_list" <code>div</code> <em>if it exists</em>.</li>
+</ul>
+</li>
+<li><p><strong>Deck Names &amp; Links</strong> do not have any unique identifiers within the html besides their links.</p>
+<ul>
+<li>Deck names are wrapped in an <code>a</code> tag with a <code>href</code> property similar to this: <code>&lt;a href="?e=79854&amp;d=806938&amp;f=ST"&gt; Name &lt;/a&gt;</code>.</li>
+<li>All deck names and links to additional information about them are specified with an event id (the <code>e=</code>), deck id (the <code>d=</code>), and the Standard play format(<code>f="ST"</code>).</li>
+<li>We can use regex and BeautifulSoup to find all <code>a</code> tags with <code>href</code> that follow this observed pattern. Then extract the link and the text!</li>
+</ul>
+</li>
+<li><p><strong>Deck Prices</strong> can be extracted using the links grabbed in <strong>(2)</strong>.</p>
+<ul>
+<li>Each link leads to deck information, such as the list of cards included in the deck and the deck's cumulative market value.</li>
+<li>On these pages the deck price is wrapped in a <code>div</code> with the <code>class</code> "S14 Nav_buy_price".</li>
+<li>We can grab the deck prices from each of these links using BeautifulSoup's <code>find</code> method to get the first <code>div</code> with that class name.</li>
+</ul>
+</li>
+</ol>
+<p>Once we have this information for each tournament HTML, we can combine into one dataframe that contains deck information for each deck played in all tournaments in the last full month (January 2026). The current index of the for loop indicates which row in the <code>all_tournaments_df</code> data is being grabbed for. This can be used to link the two tables later. Data we've collected for other columns can be added as well in tournament sized batches.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b03c9758">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [185]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># as we extract data for each tournament we cna add it to the decks_df in chunks</span>
+<span class="n">decks_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Rank"</span><span class="p">,</span> <span class="s2">"Players"</span><span class="p">,</span> <span class="s2">"DeckNames"</span><span class="p">,</span> <span class="s2">"DeckPrices"</span><span class="p">,</span> <span class="s2">"DeckLinks"</span><span class="p">,</span> <span class="s2">"TournamentIdx"</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">tournament_html</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tournaments_html</span><span class="p">):</span>
+    <span class="c1"># (1) Players &amp; Rank</span>
+    <span class="n">top8_list</span> <span class="o">=</span> <span class="n">tournament_html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"div"</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"top8_list"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">top8_list</span><span class="p">:</span>       <span class="c1"># if sidebar is split into top 8 list and deck list, only grab "a" tags with "player" class from top 8 list     </span>
+        <span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">top8_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">"player"</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>       <span class="c1"># otherwise, you can just grab directly from the html</span>
+        <span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">tournament_html</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">"player"</span><span class="p">)]</span>
+    <span class="c1">#</span>
+    <span class="n">ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>        <span class="c1"># there are as many ranks as collected players in order</span>
+
+
+    <span class="c1"># (2) Deck Names &amp; Links</span>
+    <span class="n">decks_href</span> <span class="o">=</span> <span class="n">tournament_html</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> 
+        <span class="n">href</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\?e=\d+&amp;d=\d+&amp;f=ST\Z"</span><span class="p">),</span> 
+        <span class="n">string</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>       <span class="c1"># the first match is an arrow, but the rest are decks</span>
+    <span class="n">deck_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">deck_href</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">deck_href</span> <span class="ow">in</span> <span class="n">decks_href</span><span class="p">]</span>         <span class="c1"># the text is the deck name</span>
+    <span class="n">base_url</span> <span class="o">=</span> <span class="s2">"https://mtgtop8.com/event"</span>
+    <span class="n">deck_links</span> <span class="o">=</span> <span class="p">[</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">deck_href</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'href'</span><span class="p">)</span> <span class="k">for</span> <span class="n">deck_href</span> <span class="ow">in</span> <span class="n">decks_href</span><span class="p">]</span>
+
+
+    <span class="c1"># (3) Deck Prices</span>
+    <span class="n">deck_prices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">deck_link</span> <span class="ow">in</span> <span class="n">deck_links</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">deck_link</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>        <span class="c1"># checks status code just in case we run into issues</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Could not scrape deck data for </span><span class="si">{</span><span class="n">deck_link</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="c1">#</span>
+
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">deck_price_div</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"div"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">"S14 Nav_buy_price"</span><span class="p">)</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>    <span class="c1"># finds first div with this class name</span>
+        <span class="n">deck_prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"\d+"</span><span class="p">,</span> <span class="n">deck_price_div</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>      <span class="c1"># extracts just the dollar amount and tracks it</span>
+    <span class="c1">#</span>
+
+
+    <span class="c1"># (4) Create dataframe for current data and add it to overall dataframe</span>
+    <span class="n">tournament_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">),</span> <span class="n">idx</span><span class="p">)</span>   <span class="c1"># creates an array of size (players) filled with the current index</span>
+    <span class="n">tournament_decks_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>    <span class="c1"># current tournament's deck df</span>
+        <span class="s2">"Rank"</span><span class="p">:</span> <span class="n">ranks</span><span class="p">,</span> 
+        <span class="s2">"Player"</span><span class="p">:</span> <span class="n">players</span><span class="p">,</span> 
+        <span class="s2">"Name"</span><span class="p">:</span> <span class="n">deck_names</span><span class="p">,</span> 
+        <span class="s2">"Price"</span><span class="p">:</span> <span class="n">deck_prices</span><span class="p">,</span> 
+        <span class="s2">"Link"</span><span class="p">:</span> <span class="n">deck_links</span><span class="p">,</span>
+        <span class="s2">"TournamentIdx"</span><span class="p">:</span> <span class="n">tournament_idx</span>
+    <span class="p">})</span>
+    <span class="n">decks_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">decks_df</span><span class="p">,</span> <span class="n">tournament_decks_df</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>        <span class="c1"># add to the dataframe with all decks</span>
+<span class="c1">#</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">decks_df</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">decks_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Rank</th>
+<th>Players</th>
+<th>DeckNames</th>
+<th>DeckPrices</th>
+<th>DeckLinks</th>
+<th>TournamentIdx</th>
+<th>Player</th>
+<th>Name</th>
+<th>Price</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>1</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Collins Mullen</td>
+<td>Temur Full Bore Harmonizer</td>
+<td>474</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806938&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Edgar Magalhaes</td>
+<td>Dimir Control</td>
+<td>570</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806939&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Guiyote</td>
+<td>Bant Airbending</td>
+<td>910</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806941&amp;f=ST</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Thomas Mechin</td>
+<td>Izzet Spellementals</td>
+<td>382</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806940&amp;f=ST</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Ondrej Strasky</td>
+<td>Izzet Lesson</td>
+<td>580</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806942&amp;f=ST</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Rank             object
+Players          object
+DeckNames        object
+DeckPrices       object
+DeckLinks        object
+TournamentIdx    object
+Player              str
+Name                str
+Price               str
+Link                str
+dtype: object</pre>
+</div>
 </div>
 </div>
 </div>
@@ -7857,13 +9296,163 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=57e07ce1">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e75ad6aa">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Loading">Loading<a class="anchor-link" href="#Loading">¶</a></h3>
+<p>The dataframe we got in the <a href="#extracting-decks">Extracting</a> section above still needs a little polishing with the data types!</p>
+<ul>
+<li>Rank is ordinal data so it can stay an <code>object</code></li>
+<li>Players, Names, and Links are all <code>strings</code></li>
+<li>DeckPrices is a <code>float</code></li>
+<li>TournamentIdx is an <code>integer</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=216f0c0f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [187]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">decks_df</span><span class="p">[[</span><span class="s2">"Player"</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Link"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">decks_df</span><span class="p">[[</span><span class="s2">"Player"</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Link"</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">)</span>
+<span class="n">decks_df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">=</span> <span class="n">decks_df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"float"</span><span class="p">)</span>
+<span class="n">decks_df</span><span class="p">[</span><span class="s2">"TournamentIdx"</span><span class="p">]</span> <span class="o">=</span> <span class="n">decks_df</span><span class="p">[</span><span class="s2">"TournamentIdx"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"int"</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">decks_df</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">decks_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Rank</th>
+<th>Players</th>
+<th>DeckNames</th>
+<th>DeckPrices</th>
+<th>DeckLinks</th>
+<th>TournamentIdx</th>
+<th>Player</th>
+<th>Name</th>
+<th>Price</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>1</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Collins Mullen</td>
+<td>Temur Full Bore Harmonizer</td>
+<td>474.0</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806938&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Edgar Magalhaes</td>
+<td>Dimir Control</td>
+<td>570.0</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806939&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Guiyote</td>
+<td>Bant Airbending</td>
+<td>910.0</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806941&amp;f=ST</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Thomas Mechin</td>
+<td>Izzet Spellementals</td>
+<td>382.0</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806940&amp;f=ST</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>0</td>
+<td>Ondrej Strasky</td>
+<td>Izzet Lesson</td>
+<td>580.0</td>
+<td>https://mtgtop8.com/event?e=79854&amp;d=806942&amp;f=ST</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Rank              object
+Players           object
+DeckNames         object
+DeckPrices        object
+DeckLinks         object
+TournamentIdx      int64
+Player               str
+Name                 str
+Price            float64
+Link                 str
+dtype: object</pre>
+</div>
 </div>
 </div>
 </div>
@@ -7896,10 +9485,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<ul>
-<li>explain how decks are named by archetypes and how even though individual cards may differ the deck still maintains a "gimmick" (<em>strategy</em> strengths and weaknesses)</li>
-<li>reason: examining these deck archetypes closer would indicate future features to explore (mana curve, card cost, creature vs spells)</li>
-</ul>
+<p>When a deck wins many MTG tournaments, it is typically deconstructed into the type of cards it contains and becomes a template for new decks to be built from. The <code>Name</code> column in the <code>decks_df</code> refers to deck's archetype, or template, that it is inspired by. Decks with the same archetype will be similar in features, but cards may differ since decks are constructed from a player's existing pool of cards.</p>
+<p>If an archetype becomes really popular it usually has something to do with the core features of the cards within the deck (e.g., the mana curve or the variety of card types) being effective components for winning. Due to this, we'll be exploring archetypes within our list of decks for this section.</p>
 </div>
 </div>
 </div>
@@ -7914,6 +9501,33 @@ a.anchor-link {
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c0641939">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">decks_df</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>        <span class="c1"># archetypes are listed by name, so grab most frequent value in 'Name' column</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>0    Izzet Lesson
+Name: Name, dtype: str</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=106c7651">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7925,6 +9539,66 @@ a.anchor-link {
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=365a34b4">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [209]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># groupby "Rank" column then aggregate by most frequent archetype in the "Name" column</span>
+<span class="n">display</span><span class="p">(</span><span class="n">decks_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Rank"</span><span class="p">)[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="k">lambda</span> <span class="n">group</span><span class="p">:</span> <span class="n">group</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Rank
+1             Red Deck Wins
+2              Izzet Lesson
+3              Izzet Lesson
+4     Simic Nature's Rhythm
+5               Dimir Aggro
+6              Izzet Lesson
+7     Simic Nature's Rhythm
+8     Simic Nature's Rhythm
+9               Boros Aggro
+10             Izzet Lesson
+11             Izzet Lesson
+12             Izzet Lesson
+13             Izzet Lesson
+14    Simic Nature's Rhythm
+15    Simic Nature's Rhythm
+16    Simic Nature's Rhythm
+17               Bant Aggro
+18          Bant Airbending
+19              Dimir Aggro
+20              Dimir Aggro
+21              Esper Aggro
+22            Golgari Aggro
+23             Izzet Lesson
+24             Izzet Lesson
+25             Izzet Lesson
+26             Izzet Lesson
+27             Izzet Lesson
+28           Jeskai Control
+29         Mono Green Aggro
+30            Red Deck Wins
+31    Simic Nature's Rhythm
+32    Simic Nature's Rhythm
+Name: Name, dtype: str</pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fb204000">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7932,7 +9606,12 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Does-popular-deck-archetype-align-with-the-best-for-winning?">Does popular deck archetype align with the best for winning?<a class="anchor-link" href="#Does-popular-deck-archetype-align-with-the-best-for-winning?">¶</a></h3>
+<h3 id="Most-popular-archetype-overall-is-not-the-most-popular-deck-for-winnining.">Most popular archetype overall is not <em>the</em> most popular deck for winnining.<a class="anchor-link" href="#Most-popular-archetype-overall-is-not-the-most-popular-deck-for-winnining.">¶</a></h3><p>Izzet Lessons is the most popular deck archetype overall but Red Deck Wins seems to be the most popular archetype in the 1st rank. While Izzet Lessons takes 2nd and 3rd rank, it's listed throughout the other ranks, as well. There's a few reasons this could happen:</p>
+<ul>
+<li>This deck may be popular due the inclusion of easier mechanics. This would make it easy to learn and have a high success rate at first but an opponent may find it easily predictable.</li>
+<li>Alternatively, it could be a very strong archetype that does take time to learn, but due to it's popularity, opponents have come to expect it and have prepared how to navigate the deck's abilities.</li>
+</ul>
+<p>An <a href="https://mtgtop8.com/event?e=80827&amp;d=814365&amp;f=ST&amp;switch=visual">Izzet Lessons</a> deck archetype wins by playing cards that slowly deal damage to an opponent until they lose the game. While a <a href="https://mtgtop8.com/event?e=80949&amp;d=815406&amp;f=ST&amp;switch=visual">Red Deck Wins</a> deck archetype takes a more aggressive approach and is able to play cards more quickly since the in-game cost for them is less. Red Deck Wins seems like the worst opponent for Izzet Lessons, no matter the archetype's inherent strength, and is likely why it's ranked 2nd and 3rd.</p>
 </div>
 </div>
 </div>
@@ -7948,6 +9627,18 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dd881368">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>It is a common belief within the community that the more a card (or deck) is valued the more likely a player's chances are for success. While this may hold more truth for MTG when compared to other popular trading card games, many argue that there are other aspects to deck building that are equally as important.</p>
+<p>This section starts to analyze the relationship between a deck's market value and the it's tournament success, or rank.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=274a03e1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7958,14 +9649,104 @@ a.anchor-link {
 </div>
 </div>
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=20a94884">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f0357eda">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [235]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># groupby "Rank" column then aggregate by average "Price" rounded to 2 decimal places</span>
+<span class="n">rank_prices</span> <span class="o">=</span> <span class="n">decks_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Rank"</span><span class="p">)[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">rank_prices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Rank
+1      766.87
+2      662.18
+3      722.07
+4      811.60
+5      663.64
+6      653.84
+7      779.80
+8      887.63
+9      668.25
+10     710.15
+11     645.20
+12     663.50
+13     676.30
+14     803.45
+15     985.95
+16     891.78
+17     543.50
+18     637.50
+19     501.00
+20     509.50
+21     640.50
+22     815.50
+23     663.50
+24     706.00
+25     704.50
+26     377.50
+27     886.50
+28     947.50
+29     956.50
+30     755.50
+31    1142.50
+32     891.00
+Name: Price, dtype: float64</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0cdc5899">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [220]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cheapest Deck Price: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">rank_prices</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Cheapest Deck Rank: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">rank_prices</span><span class="o">.</span><span class="n">idxmin</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expensive Deck Price: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">rank_prices</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Expensive Deck Rank: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">rank_prices</span><span class="o">.</span><span class="n">idxmax</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Cheapest Deck Price: 377 	 Cheapest Deck Rank: 26
+Expensive Deck Price: 1142 	 Expensive Deck Rank: 31
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7191c733">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Which-rank-had-the-most-spread-in-deck-price?">Which rank had the most spread in deck price?<a class="anchor-link" href="#Which-rank-had-the-most-spread-in-deck-price?">¶</a></h3>
+<p>While the rank with cheapest decks on average may not be very high, it is still higher than the rank with the most expensive decks on average! It also looks like average price of the #1 ranked deck is somewhere in the middle of these values, which suggests that deck price may not be the biggest deciding factor for winability.</p>
 </div>
 </div>
 </div>
@@ -7981,6 +9762,56 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=df9c6168">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The end goal of this notebook is to train a model to predict deck's winability based off the ranks we've collected, so it's important to visualize the distribution of our dataset over rank. This helps us identify class imbalances and get a general understanding of our dataset!</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1da8e45c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">rank_freq</span> <span class="o">=</span> <span class="n">decks_df</span><span class="p">[</span><span class="s2">"Rank"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>         <span class="c1"># counts frequency of unique values in "Rank"</span>
+<span class="n">rank_freq</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Number of Decks Per Rank"</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>       <span class="c1"># bar plot </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
+<img alt="No description has been provided for this image" class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAzYAAAHaCAYAAADSVtyRAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjgsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvwVt1zgAAAAlwSFlzAAAPYQAAD2EBqD+naQAAN/ZJREFUeJzt3QmcVWX9P/AHRMENFS1wAZe0cK8oFbVUwsjMDds0E42yzN1KpcwtDbJyS8TqZ5iWkVha5k/NXEsBt7RccjdJBMwF3ECU+399n9/rzv/OOKAz984MD/N+v173NTP33jnn3HPOPef5PMs5PSqVSiUBAAAUrGdXLwAAAEC9BBsAAKB4gg0AAFA8wQYAACieYAMAABRPsAEAAIon2AAAAMUTbAAAgOIJNgAAQPEEG4AudNNNN6UePXqkyy67rIjtMGvWrPTpT386rb766nm5zzrrrLSkWm+99dKnPvWprl6MpdKFF16Yt/+dd97Z1YsC0ESwAbpNIaxPnz7p6aeffsvrO+64Y9pss826ZNlKc9RRR6Vrr702jRkzJl188cXpE5/4xCLfG+u8+ujVq1fq169fGjJkSDriiCPSAw88kEpX+/l69uyZ1lprrfTxj388h9WO9uSTT75l/rF+d9lllzRlypQOnz/AkqhXVy8AQGeZP39+GjduXPrJT35ipbfTDTfckPbYY4/0zW9+8x29f+edd077779/qlQqac6cOenee+9Nv/zlL9N5552XfvCDH6Sjjz666G1R+/meeOKJ/LmGDRuWrrrqqhwyOto+++yTPvnJT6Y333wzPfzww3n+O+20U7rjjjvS5ptv3uHzB1iSCDZAt/H+978//fznP8+tDVG73p288soracUVV6x7OrNnz06rrrrqO37/e9/73rTffvs1ey7C5W677Za+8Y1vpMGDB+eCealafr699torbbHFFrmLXr3B5p1ssw9+8IPN5v+Rj3wkz3fChAk55AB0J7qiAd3Gt7/97VyzHQXrd9LNJ7qwtRTPn3TSSU1/x+/xXNSWRwFzlVVWSe9617vSd7/73VyLP3369NzC0bdv3zRgwID04x//uNV5xnLF8sV7ojC7++675/9tadq0abn7V8xnhRVWSDvssEO69dZbm72nukzR3WvfffdNq622Wtp+++0X+5kff/zx9JnPfCZ3Z4rpbrPNNrnVoWV3vvhM48ePb+oC1R4xPmfSpEm5e9ppp532lla1E088MW244Yapd+/eaeDAgemYY47Jz7f0q1/9Km211VZ5eeMzfvSjH01//vOfFzvvaC2K+X7rW99qei6WJbrIrbzyynk7RUvH2Wef3a7PFv+7xhpr5Nabqn/96195XFKs2+gO+aEPfSj98Y9/bPZ/1fV78803p69//evp3e9+d1pnnXXaPP8INuGxxx5r9vzEiRNzS1JMN9brJptsksPPosYl/e1vf8vrNpZ3gw02SBdddNHbzvuFF17I/xPL/dBDD7V52QHqJdgA3cb666+fuw1Fq82MGTMaOu3Pfe5zaeHChTk0bb311unUU0/NtfbRVWnttdfO3a6isB5duG655Za3/H8U8CNIHHvssenwww9P1113XRo+fHh67bXXmnUDi8L73Llzc+H/+9//fnrxxRdzgfX2229/yzQjqLz66qv5fV/5ylcWe0GAbbfdNo+diUJ1LMu8efNyuLr88svze2K+MaYmxGeK36t/t8egQYNyKJs6dWr+PCHWX8zzRz/6UW7RiS6De+65ZzrzzDPz+q118sknpy9+8Ytp2WWXTaecckr+O0JQrKNF+dnPfpYOPPDAdNxxx6Uf/vCH+blYz9GdK4JRbKPYfjHmqmVYfKeicB+PCG/h/vvvzyHxwQcfzPONYBvBNT5Xdd3WivUfgfSEE07I72+rCOUhPk+tCDHrrrtuDs+xDLGuYl4RUlt69NFHcxCL7RzvjWkdcMAB+bMsyn//+9+8H8a+FOHsfe97X5uXHaBuFYCl3MSJEytxuLvjjjsqjz32WKVXr16Vww8/vOn1HXbYobLppps2/f3EE0/k98f/tRTPn3jiiU1/x+/x3EEHHdT03BtvvFFZZ511Kj169KiMGzeu6fkXXnihsvzyy1dGjRrV9NyNN96Y/3/ttdeuzJ07t+n5Sy+9ND9/9tln578XLlxY2WijjSojRozIv1e9+uqrlfXXX7+y8847v2WZ9tlnn3e0fo488sj8/r/+9a9Nz7300kt5uuutt17lzTffbPb5DznkkHc03bd77xFHHJHfc++99+a/L7744krPnj2bLUc4//zz8/tuvfXW/PcjjzyS37fXXns1W7ZQu27WXXfdyq677pp/j/UY2+N73/veW5ahb9++eZu1VSzT6NGjK88++2xl9uzZlWnTplU+9rGP5ed//OMf5/fE35tvvnll3rx5zZZx2223zduz5T66/fbbv6Nlqe6jJ598cp7/zJkz83r78Ic/nJ+fPHlys/fHftJS7EsbbLBBs+dincX/33LLLU3PxWfr3bt35Rvf+Ear36lnnnkmf39iWk8++eQ7Xn8AjabFBuhWoltN1PRH7f0zzzzTsOl++ctfbvp9mWWWyd2Nouw7evTopudjbErUZEe3r5aiJSm6QlVFjfmaa66Z/vd//zf/fc8996RHHnkkdy177rnncg15PGIcxsc+9rHcChQtHrW+9rWvvaNlj3lEF6La7morrbRSOuigg3ILQEddwSzmEV566aX8c/LkyWnjjTfO426qn6/aEhBuvPHG/POKK67InzVaNeJqYLVa6x53+umn5yuxRYvM8ccf3+y12CaxDqPlpj0uuOCC3PUwunhFS1209MQFEY488sj0/PPP5xakz372s/kzVj9PbL8RI0bk7dnyKn3Rshb7zzsVLXcx/+jCGN3QomUoWlli/6m1/PLLN/0eF3GI5YgWs9gX4+9a0U2t2qUtxPQXtd/+5z//ydNZsGBB3gejVQigq7h4ANDtROE2ulFFt6P2jqVorWtVrRgDE+MTYrxFy+ejYNvSRhtt9JYCenRdq3YtikJwGDVq1CKXIQqotV2QouvdO/Hvf/87F8pbipBRfb0jLof98ssv55/VQBefMQrmUZBe1IULquNHItBEAfztRLeoahe/2nE1VdEd69JLL80D7qPLYFyuOYLI4i5jXSvGTx166KF5e8Xn2HTTTZsG/EeXrgi3Md4qHov6TDHftm6zqgif0eUwug5GiDrnnHPyeK2WInBFCIpLQUf3xJb7TeyXi9qXQ+xX0cWupagkiDFLsd0iXAF0JcEG6JatNjHQP1ptWhvHsKhB8a0VGKtaq2VfVM37//Viaptqa0yMDYmruy2uBaS1Wvol0X333ZfXUbUwH58xBt+fccYZrb4/xoW0VQSNGIcUQfarX/3qW4JDtLREa1iML7r66qvzIwbaRwtaXGjg7cRA+RgLtbhtFuOqooWmNRFe69lmEYir849B/7E+Y5+OSz5Hq2E1CEarXrSExbqN9bjccsvllroYv9Sypa8t++3IkSPzhQWigmDs2LFtWnaARhNsgG7bahNX1YruSS1VWz2iQFwrWi46SrVFprYQGTX+ceng8J73vCf/jKt2Laog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4WnKlClvef/8+fPzo2rOnDn559y5c9/y3oXzX23z8rQ2ncVp6zxMv2vXj21Q3vrpjHmYfmPXj21Q3vrpjHmYfmPXj21Q3vrpjHmYfmpaZ5VK5W3XV4/KO3lXG8yYMSOtvfba6bbbbktDhw5tev6YY45JN998c5o2bVqz95900knp5JNPbuQiAAAAS5Hp06enddZZp3NbbNoqWnZiPE7VwoUL0/PPP59WX3311KNHj7f9/0hxAwcOzB+2b9++HbKMHT0P07eOuvs+1BnzMH3rqLvvQ50xD9Pv2vVjG3T9+rENGr8Nog3mpZdeSmuttdbbvrfhwWaNNdZIyyyzTJo1a1az5+PvAQMGvOX9vXv3zo9aq666apvnGyumo3bQzpqH6VtH3X0f6ox5mL511N33oc6Yh+l37fqxDbp+/dgGjd0Gq6yyStdcPGC55ZZLQ4YMSddff32zVpj4u7ZrGgAAQKN0SFe06Fo2atSo9KEPfShttdVW6ayzzkqvvPJKvkoaAABAEcHmc5/7XHr22WfTCSeckGbOnJne//73p2uuuSb179+/4fOKbmxxv5yW3dlKmofpW0fdfR/qjHmYvnXU3fehzpiH6Xft+rENun792AZduw0aflU0AACApeIGnQAAAJ1JsAEAAIon2AAAAMUTbAAAgOIJNt2Ea0QAALA065DLPbPkiUvq3XvvvWnjjTfu6kWhAZ555pk0YcKE9Le//S3/3rNnz7TBBhukPffcMx1wwAFpmWWWsZ4BgG5lqQs206dPz9fG/sUvftHuabz22mvprrvuSv369UubbLJJs9fmzZuXLr300rT//vu3e/oPPvhgmjp1aho6dGgaPHhw+te//pXOPvvsNH/+/LTffvulYcOG1XVz1Na8+eabady4cWn11VfPf59xxhmpEeLGq7E+Hn300bTmmmumffbZp2ke7XX33Xen1VZbLa2//vr574svvjidf/756amnnkrrrrtuOvTQQ9PnP//5dk//sMMOS5/97GfTRz7ykdRRzj333HT77benT37yk3lZ4zOMHTs2LVy4MI0cOTKdcsopqVev9n397rzzzjR8+PC04YYbpuWXXz498sgjad99902vv/56+uY3v5n3/bhv1Morr9zwzwWUJ45FU6ZMyfeVCwMGDMjnn7iBdkd64YUX0pVXXlnX+TLEcTMqb1p7/j//+U8aNGhQXb0ZnnzyyTRw4MB8TI7j6OWXX57Px3H8XmONNVKjxTl+4sSJ+XzWEZ544ommc/Jmm21W17RiPcS6X3bZZfPfjz32WD7HVM/Ho0ePbjpXt8fvfve7tMsuu6QVVlghdZSo1I0y3Y477pgrAO+///40fvz4vP/stddeacSIEQ2Zzw033PCWysbdd989bbTRRg2ZPu9QZSlzzz33VHr27Nnu/3/ooYcq6667bqVHjx55Oh/96EcrM2bMaHp95syZdU3/6quvriy33HKVfv36Vfr06ZP/fte73lUZPnx4ZdiwYZVlllmmcv3117d7+rHc73//+ys77rhjs0c8/+EPfzj/vtNOO7V7+htvvHHlueeey78/9dRTlfXWW6+yyiqr5GnHZ3r3u99defzxxyv12GKLLSrXXXdd/v3nP/95Zfnll68cfvjhlQkTJlSOPPLIykorrVS54IIL2j396rbdaKONKuPGjas888wzlUb63ve+V1l55ZUre++9d2XAgAF5Hquvvnrl1FNPrXz/+9/P2/uEE05o9/S32267ykknndT098UXX1zZeuut8+/PP/983v6xvuo1f/78ym9/+9u8zj//+c/nR/x+6aWX5tc6UnzPTj755LqnM3369MpLL730ludff/31ys0331z39P/73/9WbrjhhqbvxLPPPpu3dyz7Aw88UOkI66+/fuXhhx9u+HQXLlyYP8vPfvazypVXXpnXUb3rPtZH1S233FLZd999K9tvv33lC1/4QuW2226re5l/9KMfVZ588slKR4p18d3vfrfyt7/9Lf8dx+dddtmlMmLEiMpPf/rTuqf/6quv5uPZgQceWPnEJz5R+eQnP1k59NBDK3/5y1/qnvasWbPy+o5jXpzXttpqq/yonuPitXjPkno+njNnTuUzn/lMPlfGuSW2wxtvvNGw8/G//vWvvC5iGhtuuGE+dw0ZMqSy4oorVlZYYYXKGmusUdd37Q9/+EOrjzjPn3vuuU1/1+Pggw9uOsbFvhTnnfg81fNcnO9bOwa+UzvssENl8uTJ+ff4DvTu3Tufoz/3uc9VPvCBD+T1VM93OZazb9++la985SuVqVOnVhrtd7/7XV7fcQ6OskOULVZdddVc5orvcLz261//uq55xHcovlexvnv16pV/xn4U5/+Y/re+9a2GfJZp06ZVzjrrrMpxxx2XH/F7PNfRnn/+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"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6eaa7f95">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>The distribution of decks per rank is right skewed, meaning that there is drastically more deck data for ranks 1-16 than 16-32. This is something I'll have to keep in mind when modeling later!</p>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=982929b9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -7989,6 +9820,9 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="References">References<a class="anchor-link" href="#References">¶</a></h1><ul>
 <li><a href="https://en.wikipedia.org/wiki/Magic:_The_Gathering">https://en.wikipedia.org/wiki/Magic:_The_Gathering</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.extract.html">https://pandas.pydata.org/docs/reference/api/pandas.Series.str.extract.html</a></li>
+<li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html#the-aggregate-method">https://pandas.pydata.org/docs/user_guide/groupby.html#the-aggregate-method</a></li>
+<li><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html">https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html</a></li>
 </ul>
 </div>
 </div>
@@ -7998,7 +9832,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>/Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.ipynb
@@ -8015,7 +9849,7 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>[NbConvertApp] Converting notebook /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.ipynb to html
-[NbConvertApp] Writing 308802 bytes to /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.html
+[NbConvertApp] Writing 316375 bytes to /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.html
 </pre>
 </div>
 </div>
