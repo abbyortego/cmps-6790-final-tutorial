@@ -7528,7 +7528,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [250]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
@@ -7635,7 +7635,7 @@ a.anchor-link {
 </ul>
 </li>
 <li>Within the Last Full Month (January 2026 at the time of submission)<ul>
-<li>Rulings and strategies for MTG evolve over time so selecting tournaments that occurred recently will best reflect the current what aspects of a deck are most important for winning.</li>
+<li>Rulings and strategies for MTG evolve over time so selecting tournaments that occurred recently will best reflect which current aspects of a deck are most important for winning.</li>
 </ul>
 </li>
 </ul>
@@ -7713,7 +7713,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># get all tournaments tables</span>
@@ -7750,11 +7750,11 @@ a.anchor-link {
   &lt;img height="17" src="/graph/online/paper.png" title="Paper"/&gt;
  &lt;/td&gt;
  &lt;td class="S14" width="70%"&gt;
-  &lt;a href="event?e=80805&amp;amp;f=ST"&gt;
-   Friday LCQ #11
+  &lt;a href="event?e=80800&amp;amp;f=ST"&gt;
+   Friday LCQ #14
   &lt;/a&gt;
   @
-  &lt;a class="und" href="event?e=80805&amp;amp;f=ST"&gt;
+  &lt;a class="und" href="event?e=80800&amp;amp;f=ST"&gt;
    SCG CON Milwaukee
   &lt;/a&gt;
  &lt;/td&gt;
@@ -7772,11 +7772,11 @@ a.anchor-link {
   &lt;img height="17" src="/graph/online/paper.png" title="Paper"/&gt;
  &lt;/td&gt;
  &lt;td class="S14" width="70%"&gt;
-  &lt;a href="event?e=80793&amp;amp;f=ST"&gt;
-   Friday LCQ #10
+  &lt;a href="event?e=80796&amp;amp;f=ST"&gt;
+   Friday LCQ #12
   &lt;/a&gt;
   @
-  &lt;a class="und" href="event?e=80793&amp;amp;f=ST"&gt;
+  &lt;a class="und" href="event?e=80796&amp;amp;f=ST"&gt;
    SCG CON Milwaukee
   &lt;/a&gt;
  &lt;/td&gt;
@@ -7803,16 +7803,17 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Now that we have the tournament tables, we can extract the information we're interested in from the html. We're looking for...</p>
 <ol>
-<li>Tournament Names (to identify tournaments) and Dates (to grab recent tournaments)<ul>
+<li><strong>Tournament Names</strong> (to identify tournaments) and <strong>Dates</strong> (to grab recent tournaments)<ul>
 <li>These are stored as text within the html tags, so we can use BeautifulSoup's <code>get_text()</code> method to extract this information from the table.</li>
-<li>When you do you get a string that looks like this: <code>'\n\n\nRCQ @ Draco Hobby Center (Bogota, Colombia)\n\n01/02/26\n\n\n\nMTGO RC Super Qualifier\n\n01/02/26\n\n\n\n2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Richmond, VA)\n\n31/01/26\n\n\n\n</code></li>
+<li>When you do, you get a string that looks like this: <code>'\n\n\nRCQ @ Draco Hobby Center (Bogota, Colombia)\n\n01/02/26\n\n\n\nMTGO RC Super Qualifier\n\n01/02/26\n\n\n\n2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Richmond, VA)\n\n31/01/26\n\n\n\n</code></li>
 <li>It's not very pretty but the new line characters do have a pattern! 3-4 new line characters separate tournaments and 2 new line characters separate tournament name from date. We can use regex to parse the string using this pattern.</li>
 </ul>
 </li>
-<li>Links to Additional Tournament Information (grab more details later)<ul>
+<li><strong>Links</strong> to Additional Tournament Information (for grabbing more details later)<ul>
 <li>These are stored in <code>a</code> tags with an <code>href</code> property</li>
 <li>Some entries in the table record an additional <code>a</code> tag with the <code>class</code> property specified in addition to <code>href</code>. These tags have duplicate information that we don't need.</li>
-<li>We can use BeautifulSoup's <code>find_all()</code> method to find all <code>a</code> tags that have an <code>href</code> property specified but no <code>class</code> property.- Lastly, we can use the <code>get()</code> method to extract the links.</li>
+<li>We can use BeautifulSoup's <code>find_all()</code> method to find all <code>a</code> tags that have an <code>href</code> property specified but no <code>class</code> property.</li>
+<li>Lastly, we can use the <code>get()</code> method to extract the links.</li>
 </ul>
 </li>
 </ol>
@@ -7824,7 +7825,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># lists to store data</span>
@@ -7866,26 +7867,26 @@ a.anchor-link {
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>['MTGO Challenge 32 NEW',
+ 'MTGO Challenge 32 NEW',
+ 'MTGO Challenge 32 NEW',
  'MTGO Challenge 64 NEW',
- 'Champions Cup Store Qualifier @ Machida (Japan) NEW',
- 'MTGO Challenge 64',
- 'Sunday ReCQ #2 @ SCG CON Milwaukee NEW']</pre>
+ 'Champions Cup Store Qualifier @ Machida (Japan)']</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['26/02/26', '24/02/26', '23/02/26', '23/02/26', '22/02/26']</pre>
+<pre>['28/02/26', '27/02/26', '26/02/26', '24/02/26', '23/02/26']</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['event?e=81053&amp;f=ST',
+<pre>['event?e=81139&amp;f=ST',
+ 'event?e=81138&amp;f=ST',
+ 'event?e=81053&amp;f=ST',
  'event?e=81055&amp;f=ST',
- 'event?e=81001&amp;f=ST',
- 'event?e=80924&amp;f=ST',
- 'event?e=80950&amp;f=ST']</pre>
+ 'event?e=81001&amp;f=ST']</pre>
 </div>
 </div>
 </div>
@@ -7906,10 +7907,10 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Names'</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span> <span class="s1">'Dates'</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">'Links'</span><span class="p">:</span> <span class="n">links</span><span class="p">})</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Name'</span><span class="p">:</span> <span class="n">names</span><span class="p">,</span> <span class="s1">'Date'</span><span class="p">:</span> <span class="n">dates</span><span class="p">,</span> <span class="s1">'Link'</span><span class="p">:</span> <span class="n">links</span><span class="p">})</span>
 <span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -7950,32 +7951,32 @@ a.anchor-link {
 <tr>
 <th>0</th>
 <td>MTGO Challenge 32 NEW</td>
+<td>28/02/26</td>
+<td>event?e=81139&amp;f=ST</td>
+</tr>
+<tr>
+<th>1</th>
+<td>MTGO Challenge 32 NEW</td>
+<td>27/02/26</td>
+<td>event?e=81138&amp;f=ST</td>
+</tr>
+<tr>
+<th>2</th>
+<td>MTGO Challenge 32 NEW</td>
 <td>26/02/26</td>
 <td>event?e=81053&amp;f=ST</td>
 </tr>
 <tr>
-<th>1</th>
+<th>3</th>
 <td>MTGO Challenge 64 NEW</td>
 <td>24/02/26</td>
 <td>event?e=81055&amp;f=ST</td>
 </tr>
 <tr>
-<th>2</th>
-<td>Champions Cup Store Qualifier @ Machida (Japan...</td>
+<th>4</th>
+<td>Champions Cup Store Qualifier @ Machida (Japan)</td>
 <td>23/02/26</td>
 <td>event?e=81001&amp;f=ST</td>
-</tr>
-<tr>
-<th>3</th>
-<td>MTGO Challenge 64</td>
-<td>23/02/26</td>
-<td>event?e=80924&amp;f=ST</td>
-</tr>
-<tr>
-<th>4</th>
-<td>Sunday ReCQ #2 @ SCG CON Milwaukee NEW</td>
-<td>22/02/26</td>
-<td>event?e=80950&amp;f=ST</td>
 </tr>
 </tbody>
 </table>
@@ -8034,7 +8035,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [162]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># boolean mask of tournament names that do not include MTGO</span>
@@ -8079,19 +8080,19 @@ dtype: object</pre>
 <tbody>
 <tr>
 <th>0</th>
-<td>Champions Cup Store Qualifier @ Machida (Japan...</td>
+<td>Champions Cup Store Qualifier @ Machida (Japan)</td>
 <td>23/02/26</td>
 <td>event?e=81001&amp;f=ST</td>
 </tr>
 <tr>
 <th>1</th>
-<td>Sunday ReCQ #2 @ SCG CON Milwaukee NEW</td>
+<td>Sunday ReCQ #2 @ SCG CON Milwaukee</td>
 <td>22/02/26</td>
 <td>event?e=80950&amp;f=ST</td>
 </tr>
 <tr>
 <th>2</th>
-<td>Sunday RCQ #1 @ SCG CON Milwaukee NEW</td>
+<td>Sunday RCQ #1 @ SCG CON Milwaukee</td>
 <td>22/02/26</td>
 <td>event?e=80949&amp;f=ST</td>
 </tr>
@@ -8133,7 +8134,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [163]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Date"</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"</span><span class="si">%d</span><span class="s2">/%m/%y"</span><span class="p">)</span>      <span class="c1"># format to datetime</span>
@@ -8233,7 +8234,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [164]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">base_url</span> <span class="o">=</span> <span class="s2">"https://mtgtop8.com"</span>
@@ -8323,7 +8324,7 @@ dtype: object</pre>
 <ol start="4">
 <li>Overloaded Name Column</li>
 </ol>
-<p>The tournament name is storing a lot of information (e.g., day, actual name, and convention). We can use regex to separate the values into their own columns.</p>
+<p>As seen below, the tournament name is storing a lot of information (e.g., day, actual name, and convention). We can use regex to separate the values into their own columns.</p>
 </div>
 </div>
 </div>
@@ -8332,10 +8333,10 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [165]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -8346,95 +8347,19 @@ dtype: object</pre>
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[165]:</div>
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
-<div>
-<style scoped="">
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th></th>
-<th>Name</th>
-<th>Date</th>
-<th>Link</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>0</th>
-<td>2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Ric...</td>
-<td>2026-01-31</td>
-<td>https://mtgtop8.com/event?e=79854&amp;f=ST</td>
-</tr>
-<tr>
-<th>1</th>
-<td>Champions Cup Special Qualifier @ Kawasaki (Ja...</td>
-<td>2026-01-30</td>
-<td>https://mtgtop8.com/event?e=79785&amp;f=ST</td>
-</tr>
-<tr>
-<th>2</th>
-<td>Pro Tour Lorwyn Eclipsed @ Richmond</td>
-<td>2026-01-30</td>
-<td>https://mtgtop8.com/event?e=79746&amp;f=ST</td>
-</tr>
-<tr>
-<th>3</th>
-<td>Saturday ReCQ #2 @ SCG CON Portland</td>
-<td>2026-01-25</td>
-<td>https://mtgtop8.com/event?e=79664&amp;f=ST</td>
-</tr>
-<tr>
-<th>4</th>
-<td>Super Sunday RCQ #2 @ SCG CON Portland</td>
-<td>2026-01-25</td>
-<td>https://mtgtop8.com/event?e=79600&amp;f=ST</td>
-</tr>
-<tr>
-<th>5</th>
-<td>Super Sunday RCQ #1 @ SCG CON Portland</td>
-<td>2026-01-25</td>
-<td>https://mtgtop8.com/event?e=79599&amp;f=ST</td>
-</tr>
-<tr>
-<th>6</th>
-<td>Izzet Explosive Experiment Event</td>
-<td>2026-01-25</td>
-<td>https://mtgtop8.com/event?e=79598&amp;f=ST</td>
-</tr>
-<tr>
-<th>7</th>
-<td>Regional Championship @ SCG CON Portland</td>
-<td>2026-01-25</td>
-<td>https://mtgtop8.com/event?e=79462&amp;f=ST</td>
-</tr>
-<tr>
-<th>8</th>
-<td>Saturday RCQ @ SCG CON Portland</td>
-<td>2026-01-24</td>
-<td>https://mtgtop8.com/event?e=79569&amp;f=ST</td>
-</tr>
-<tr>
-<th>9</th>
-<td>RCQ @ BB-Spiele (Rosenheim, Germany)</td>
-<td>2026-01-24</td>
-<td>https://mtgtop8.com/event?e=79428&amp;f=ST</td>
-</tr>
-</tbody>
-</table>
-</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
+<pre>0    2nd Chance PTQ @ Pro Tour Lorwyn Eclipsed (Ric...
+1    Champions Cup Special Qualifier @ Kawasaki (Ja...
+2                  Pro Tour Lorwyn Eclipsed @ Richmond
+3                  Saturday ReCQ #2 @ SCG CON Portland
+4               Super Sunday RCQ #2 @ SCG CON Portland
+5               Super Sunday RCQ #1 @ SCG CON Portland
+6                     Izzet Explosive Experiment Event
+7             Regional Championship @ SCG CON Portland
+8                      Saturday RCQ @ SCG CON Portland
+9                 RCQ @ BB-Spiele (Rosenheim, Germany)
+Name: Name, dtype: str</pre>
 </div>
 </div>
 </div>
@@ -8444,14 +8369,14 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [166]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">unloaded_name_col</span> <span class="o">=</span> <span class="n">all_tournaments_df</span><span class="p">[</span><span class="s1">'Name'</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s2">"""</span>
-<span class="s2">    (?:Monday\s|Tuesday\s|Wednesday\s|Thursday\s|Friday\s|Saturday\s|Sunday\s)?         # non-capture the day</span>
-<span class="s2">    (?P&lt;Name&gt;[^@]+)         # capture everything up until the @ symbol</span>
-<span class="s2">    (?:@)?      # non-capture the @ symbol, if it exists (indicated with ?)</span>
-<span class="s2">    (?P&lt;Convention&gt;.+)?         # capture convention, if it exists (indicated with ?)</span>
+<span class="s2">    (?:Monday\s|Tuesday\s|Wednesday\s|Thursday\s|Friday\s|Saturday\s|Sunday\s)?         # non-capture the day &gt;&gt;&gt; we have the date</span>
+<span class="s2">    (?P&lt;Name&gt;[^@]+)         # capture everything up until the @ symbol &gt;&gt;&gt; Actual Name</span>
+<span class="s2">    (?:@)?      # non-capture the @ symbol, if it exists (indicated with ?) &gt;&gt;&gt; Just a delimiter</span>
+<span class="s2">    (?P&lt;Convention&gt;.+)?         # capture convention, if it exists (indicated with ?) &gt;&gt;&gt; Convention / Location</span>
 <span class="s2">    """</span><span class="p">,</span>
     <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span>
 <span class="p">)</span>
@@ -8553,7 +8478,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [167]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># inner join the two dataframes on their index columns</span>
@@ -8691,7 +8616,7 @@ dtype: object</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Since both dataframes had a <code>Name</code> column, the merge produces <code>Name_x</code>, our old overloaded column, and <code>Name_y</code>, our new unloaded column. We no longer need <code>Name_x</code> so we can drop it.</p>
+<p>Since both dataframes had a <code>Name</code> column, the merge produces <code>Name_x</code>, our old overloaded column, and <code>Name_y</code>, our new unloaded column. We no longer need <code>Name_x</code> so we can drop it and rename <code>Name_y</code> to just <code>Name</code>.</p>
 </div>
 </div>
 </div>
@@ -8700,7 +8625,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [168]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'Name_x'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -8828,7 +8753,7 @@ dtype: object</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <ol start="5">
-<li>Datatypes?</li>
+<li>Datatypes</li>
 </ol>
 <p>The last thing left to check is the data types for each of these columns and ensure they're right.</p>
 </div>
@@ -8839,7 +8764,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [169]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
@@ -8880,7 +8805,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [170]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">all_tournaments_df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
@@ -9002,7 +8927,7 @@ dtype: object</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>The <code>Link</code> column in the tournament table leads to a <a href="https://mtgtop8.com/event?e=79854&amp;f=ST">tournament page</a> with player and deck information listed in the order of their rank for the competition outcome. We'll be focusing on extracting that data! Using the <code>Links</code> column in the dataframe we created above, we'll grab the html from each tournament page. With this html we'll extract the rank, deck, and current deck market value for each player in each tournament.</p>
+<p>The <code>Link</code> column in the tournament table leads to a <a href="https://mtgtop8.com/event?e=79854&amp;f=ST">tournament page</a> with player and deck information listed in the order of their rank. We'll be focusing on extracting this data! Using the <code>Links</code> column in the dataframe we created above, we'll grab the html from each tournament page. With this html we'll extract the rank, deck, and current deck market value for each player in each tournament.</p>
 </div>
 </div>
 </div>
@@ -9011,7 +8936,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">tournaments_html</span> <span class="o">=</span> <span class="p">[]</span>
@@ -9028,7 +8953,7 @@ dtype: object</pre>
     <span class="n">tournaments_html</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">soup</span><span class="p">)</span>
 <span class="c1">#</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tournaments_html</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">prettify</span><span class="p">())[:</span><span class="mi">500</span><span class="p">])</span> 
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tournaments_html</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">prettify</span><span class="p">())[:</span><span class="mi">500</span><span class="p">])</span>    <span class="c1"># first 500 chars of first tournament_html</span>
 </pre></div>
 </div>
 </div>
@@ -9069,8 +8994,8 @@ dtype: object</pre>
 <li><p><strong>Players &amp; Rank</strong> are determined based on the order players are extracted in.</p>
 <ul>
 <li>MTG Top 8 list players in the left hand panel in order of rank, so we just need to scrape this list.</li>
-<li>Unforunately, players aren't wrapped in a convenient table like tournaments were, but they are wrapped in an <code>a</code> tag with the <code>class</code> name: "player".</li>
-<li>Also, for <a href="https://mtgtop8.com/event?e=79746&amp;f=ST">really large tournaments</a> the side panel is divided into a "Top 8" and "Best Decks" categories where the pattern above is duplicated in both. We only want to extract <code>a</code> tags with <code>class</code> "player" in the "Top 8" list. Thankfully, a <code>div</code> with an <code>id</code>, "top8_list" wraps this panel <em>if it exists</em>. Using BeautifulSoup's <code>find()</code> method, we can try to get the "top8_list" <code>div</code> <em>if it exists</em>.</li>
+<li>Unfortunately, players aren't wrapped in a convenient table like tournaments were, but they are wrapped in an <code>a</code> tag with the <code>class</code> name: "player".</li>
+<li>Also, for <a href="https://mtgtop8.com/event?e=79746&amp;f=ST">really large tournaments</a> the side panel is divided into "Top 8" and "Best Decks" categories where the pattern above is duplicated in both. We only want to extract <code>a</code> tags with <code>class</code> "player" in the "Top 8" list. Thankfully, a <code>div</code> with an <code>id</code>, "top8_list" wraps this panel <em>if it exists</em>. Using BeautifulSoup's <code>find()</code> method, we can try to get the "top8_list" <code>div</code> <em>if it exists</em>.</li>
 </ul>
 </li>
 <li><p><strong>Deck Names &amp; Links</strong> do not have any unique identifiers within the html besides their links.</p>
@@ -9097,21 +9022,21 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [185]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># as we extract data for each tournament we cna add it to the decks_df in chunks</span>
-<span class="n">decks_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Rank"</span><span class="p">,</span> <span class="s2">"Players"</span><span class="p">,</span> <span class="s2">"DeckNames"</span><span class="p">,</span> <span class="s2">"DeckPrices"</span><span class="p">,</span> <span class="s2">"DeckLinks"</span><span class="p">,</span> <span class="s2">"TournamentIdx"</span><span class="p">])</span>
+<span class="n">decks_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"Rank"</span><span class="p">,</span> <span class="s2">"Player"</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Price"</span><span class="p">,</span> <span class="s2">"Link"</span><span class="p">,</span> <span class="s2">"TournamentIdx"</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">tournament_html</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tournaments_html</span><span class="p">):</span>
     <span class="c1"># (1) Players &amp; Rank</span>
     <span class="n">top8_list</span> <span class="o">=</span> <span class="n">tournament_html</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"div"</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s2">"top8_list"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">top8_list</span><span class="p">:</span>       <span class="c1"># if sidebar is split into top 8 list and deck list, only grab "a" tags with "player" class from top 8 list     </span>
         <span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">top8_list</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">"player"</span><span class="p">)]</span>
-    <span class="k">else</span><span class="p">:</span>       <span class="c1"># otherwise, you can just grab directly from the html</span>
+    <span class="k">else</span><span class="p">:</span>       <span class="c1"># otherwise, can just grab directly from the html</span>
         <span class="n">players</span> <span class="o">=</span> <span class="p">[</span><span class="n">player</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">tournament_html</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">"player"</span><span class="p">)]</span>
     <span class="c1">#</span>
-    <span class="n">ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>        <span class="c1"># there are as many ranks as collected players in order</span>
+    <span class="n">ranks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">players</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>        <span class="c1"># there are as many ranks as collected players, in order</span>
 
 
     <span class="c1"># (2) Deck Names &amp; Links</span>
@@ -9184,82 +9109,58 @@ dtype: object</pre>
 <tr style="text-align: right;">
 <th></th>
 <th>Rank</th>
-<th>Players</th>
-<th>DeckNames</th>
-<th>DeckPrices</th>
-<th>DeckLinks</th>
-<th>TournamentIdx</th>
 <th>Player</th>
 <th>Name</th>
 <th>Price</th>
 <th>Link</th>
+<th>TournamentIdx</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
 <td>1</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Collins Mullen</td>
 <td>Temur Full Bore Harmonizer</td>
-<td>474</td>
+<td>477</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806938&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>1</th>
 <td>2</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Edgar Magalhaes</td>
 <td>Dimir Control</td>
-<td>570</td>
+<td>578</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806939&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>2</th>
 <td>3</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Guiyote</td>
 <td>Bant Airbending</td>
-<td>910</td>
+<td>923</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806941&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>3</th>
 <td>4</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Thomas Mechin</td>
 <td>Izzet Spellementals</td>
-<td>382</td>
+<td>383</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806940&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>4</th>
 <td>5</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Ondrej Strasky</td>
 <td>Izzet Lesson</td>
-<td>580</td>
+<td>585</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806942&amp;f=ST</td>
+<td>0</td>
 </tr>
 </tbody>
 </table>
@@ -9270,15 +9171,11 @@ dtype: object</pre>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Rank             object
-Players          object
-DeckNames        object
-DeckPrices       object
-DeckLinks        object
+Player           object
+Name             object
+Price            object
+Link             object
 TournamentIdx    object
-Player              str
-Name                str
-Price               str
-Link                str
 dtype: object</pre>
 </div>
 </div>
@@ -9291,7 +9188,7 @@ dtype: object</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Transforming">Transforming<a class="anchor-link" href="#Transforming">¶</a></h3>
+<h3 id="Transforming-Decks">Transforming Decks<a class="anchor-link" href="#Transforming-Decks">¶</a></h3>
 </div>
 </div>
 </div>
@@ -9305,8 +9202,8 @@ dtype: object</pre>
 <p>The dataframe we got in the <a href="#extracting-decks">Extracting</a> section above still needs a little polishing with the data types!</p>
 <ul>
 <li>Rank is ordinal data so it can stay an <code>object</code></li>
-<li>Players, Names, and Links are all <code>strings</code></li>
-<li>DeckPrices is a <code>float</code></li>
+<li>Player, Name, and Link are all <code>strings</code></li>
+<li>Price is a <code>float</code></li>
 <li>TournamentIdx is an <code>integer</code></li>
 </ul>
 </div>
@@ -9317,7 +9214,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [187]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">decks_df</span><span class="p">[[</span><span class="s2">"Player"</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Link"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">decks_df</span><span class="p">[[</span><span class="s2">"Player"</span><span class="p">,</span> <span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Link"</span><span class="p">]]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">)</span>
@@ -9356,82 +9253,58 @@ dtype: object</pre>
 <tr style="text-align: right;">
 <th></th>
 <th>Rank</th>
-<th>Players</th>
-<th>DeckNames</th>
-<th>DeckPrices</th>
-<th>DeckLinks</th>
-<th>TournamentIdx</th>
 <th>Player</th>
 <th>Name</th>
 <th>Price</th>
 <th>Link</th>
+<th>TournamentIdx</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <th>0</th>
 <td>1</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Collins Mullen</td>
 <td>Temur Full Bore Harmonizer</td>
-<td>474.0</td>
+<td>477.0</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806938&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>1</th>
 <td>2</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Edgar Magalhaes</td>
 <td>Dimir Control</td>
-<td>570.0</td>
+<td>578.0</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806939&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>2</th>
 <td>3</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Guiyote</td>
 <td>Bant Airbending</td>
-<td>910.0</td>
+<td>923.0</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806941&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>3</th>
 <td>4</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Thomas Mechin</td>
 <td>Izzet Spellementals</td>
-<td>382.0</td>
+<td>383.0</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806940&amp;f=ST</td>
+<td>0</td>
 </tr>
 <tr>
 <th>4</th>
 <td>5</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
 <td>Ondrej Strasky</td>
 <td>Izzet Lesson</td>
-<td>580.0</td>
+<td>585.0</td>
 <td>https://mtgtop8.com/event?e=79854&amp;d=806942&amp;f=ST</td>
+<td>0</td>
 </tr>
 </tbody>
 </table>
@@ -9442,15 +9315,11 @@ dtype: object</pre>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Rank              object
-Players           object
-DeckNames         object
-DeckPrices        object
-DeckLinks         object
-TournamentIdx      int64
 Player               str
 Name                 str
 Price            float64
 Link                 str
+TournamentIdx      int64
 dtype: object</pre>
 </div>
 </div>
@@ -9485,7 +9354,7 @@ dtype: object</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>When a deck wins many MTG tournaments, it is typically deconstructed into the type of cards it contains and becomes a template for new decks to be built from. The <code>Name</code> column in the <code>decks_df</code> refers to deck's archetype, or template, that it is inspired by. Decks with the same archetype will be similar in features, but cards may differ since decks are constructed from a player's existing pool of cards.</p>
+<p>When a deck wins many MTG tournaments, it is typically deconstructed into the type of cards it contains and becomes a template for new decks to be built from. The <code>Name</code> column in the <code>decks_df</code> refers to a deck's archetype, or template, that it is inspired by. Decks with the same archetype will be similar in features, but cards may differ since decks are constructed from a player's existing pool of cards.</p>
 <p>If an archetype becomes really popular it usually has something to do with the core features of the cards within the deck (e.g., the mana curve or the variety of card types) being effective components for winning. Due to this, we'll be exploring archetypes within our list of decks for this section.</p>
 </div>
 </div>
@@ -9506,7 +9375,7 @@ dtype: object</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">decks_df</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>        <span class="c1"># archetypes are listed by name, so grab most frequent value in 'Name' column</span>
@@ -9544,7 +9413,7 @@ Name: Name, dtype: str</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [209]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># groupby "Rank" column then aggregate by most frequent archetype in the "Name" column</span>
@@ -9611,7 +9480,12 @@ Name: Name, dtype: str</pre>
 <li>This deck may be popular due the inclusion of easier mechanics. This would make it easy to learn and have a high success rate at first but an opponent may find it easily predictable.</li>
 <li>Alternatively, it could be a very strong archetype that does take time to learn, but due to it's popularity, opponents have come to expect it and have prepared how to navigate the deck's abilities.</li>
 </ul>
-<p>An <a href="https://mtgtop8.com/event?e=80827&amp;d=814365&amp;f=ST&amp;switch=visual">Izzet Lessons</a> deck archetype wins by playing cards that slowly deal damage to an opponent until they lose the game. While a <a href="https://mtgtop8.com/event?e=80949&amp;d=815406&amp;f=ST&amp;switch=visual">Red Deck Wins</a> deck archetype takes a more aggressive approach and is able to play cards more quickly since the in-game cost for them is less. Red Deck Wins seems like the worst opponent for Izzet Lessons, no matter the archetype's inherent strength, and is likely why it's ranked 2nd and 3rd.</p>
+<p>After reviewing the most popular deck and the top ranked deck, it becomes clearer why Red Deck Wins would over power Izzet Lessons.</p>
+<ul>
+<li>An <a href="https://mtgtop8.com/event?e=80827&amp;d=814365&amp;f=ST&amp;switch=visual">Izzet Lessons</a> deck archetype wins by playing cards that slowly deal damage to an opponent until they lose the game.</li>
+<li>While a <a href="https://mtgtop8.com/event?e=80949&amp;d=815406&amp;f=ST&amp;switch=visual">Red Deck Wins</a> deck archetype takes a more aggressive approach and is able to play cards more quickly since the in-game cost for them is less.</li>
+<li>Red Deck Wins seems like the worst opponent for Izzet Lessons, no matter the archetype's inherent strength, and is likely why Izzet Lessons is ranked 2nd and 3rd.</li>
+</ul>
 </div>
 </div>
 </div>
@@ -9634,7 +9508,7 @@ Name: Name, dtype: str</pre>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>It is a common belief within the community that the more a card (or deck) is valued the more likely a player's chances are for success. While this may hold more truth for MTG when compared to other popular trading card games, many argue that there are other aspects to deck building that are equally as important.</p>
-<p>This section starts to analyze the relationship between a deck's market value and the it's tournament success, or rank.</p>
+<p>This section starts to analyze the relationship between a deck's market value and it's tournament success, or rank.</p>
 </div>
 </div>
 </div>
@@ -9654,7 +9528,7 @@ Name: Name, dtype: str</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [235]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># groupby "Rank" column then aggregate by average "Price" rounded to 2 decimal places</span>
@@ -9673,38 +9547,38 @@ Name: Name, dtype: str</pre>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>Rank
-1      766.87
-2      662.18
-3      722.07
-4      811.60
-5      663.64
-6      653.84
-7      779.80
-8      887.63
-9      668.25
-10     710.15
-11     645.20
-12     663.50
-13     676.30
-14     803.45
-15     985.95
-16     891.78
-17     543.50
-18     637.50
-19     501.00
-20     509.50
-21     640.50
-22     815.50
-23     663.50
-24     706.00
-25     704.50
-26     377.50
-27     886.50
-28     947.50
-29     956.50
-30     755.50
-31    1142.50
-32     891.00
+1      771.69
+2      662.71
+3      725.67
+4      815.91
+5      664.42
+6      657.73
+7      787.66
+8      891.17
+9      665.15
+10     710.95
+11     647.35
+12     667.70
+13     680.75
+14     811.80
+15     992.85
+16     895.89
+17     550.50
+18     632.50
+19     487.50
+20     506.00
+21     637.00
+22     827.00
+23     668.00
+24     711.00
+25     717.00
+26     378.00
+27     897.50
+28     957.00
+29     973.00
+30     764.00
+31    1157.50
+32     902.00
 Name: Price, dtype: float64</pre>
 </div>
 </div>
@@ -9715,7 +9589,7 @@ Name: Price, dtype: float64</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [220]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cheapest Deck Price: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">rank_prices</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> Cheapest Deck Rank: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">rank_prices</span><span class="o">.</span><span class="n">idxmin</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -9732,8 +9606,8 @@ Name: Price, dtype: float64</pre>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Cheapest Deck Price: 377 	 Cheapest Deck Rank: 26
-Expensive Deck Price: 1142 	 Expensive Deck Rank: 31
+<pre>Cheapest Deck Price: 378 	 Cheapest Deck Rank: 26
+Expensive Deck Price: 1157 	 Expensive Deck Rank: 31
 </pre>
 </div>
 </div>
@@ -9777,7 +9651,7 @@ Expensive Deck Price: 1142 	 Expensive Deck Rank: 31
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">rank_freq</span> <span class="o">=</span> <span class="n">decks_df</span><span class="p">[</span><span class="s2">"Rank"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>         <span class="c1"># counts frequency of unique values in "Rank"</span>
@@ -9819,7 +9693,6 @@ Expensive Deck Price: 1142 	 Expensive Deck Rank: 31
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="References">References<a class="anchor-link" href="#References">¶</a></h1><ul>
-<li><a href="https://en.wikipedia.org/wiki/Magic:_The_Gathering">https://en.wikipedia.org/wiki/Magic:_The_Gathering</a></li>
 <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.str.extract.html">https://pandas.pydata.org/docs/reference/api/pandas.Series.str.extract.html</a></li>
 <li><a href="https://pandas.pydata.org/docs/user_guide/groupby.html#the-aggregate-method">https://pandas.pydata.org/docs/user_guide/groupby.html#the-aggregate-method</a></li>
 <li><a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html">https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html</a></li>
@@ -9832,7 +9705,7 @@ Expensive Deck Price: 1142 	 Expensive Deck Rank: 31
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [266]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>/Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.ipynb
@@ -9849,7 +9722,8 @@ Expensive Deck Price: 1142 	 Expensive Deck Rank: 31
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>[NbConvertApp] Converting notebook /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.ipynb to html
-[NbConvertApp] Writing 316375 bytes to /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.html
+[NbConvertApp] WARNING | Alternative text is missing on 1 image(s).
+[NbConvertApp] Writing 402281 bytes to /Users/aortego1/Documents/YR1/S2026/CMPS-6790-DS/FinalNotebook/cmps-6790-final-tutorial/Milestone1_FD.html
 </pre>
 </div>
 </div>
