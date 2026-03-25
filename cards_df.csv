@@ -1,0 +1,470 @@
+,Name,Type,Rarity,Legendary,Power,Toughness,Ability Count,White,Blue,Black,Red,Green,Colorless
+0,Mountain,Land,common,False,,,,0,0,0,1,0,0
+1,Rockface Village,Land,uncommon,False,,,,0,0,0,1,0,0
+2,Burnout Bashtronaut,Creature,rare,False,1,1,3,0,0,0,1,0,0
+3,Greasewrench Goblin,Creature,uncommon,False,2,1,1,0,0,0,1,0,0
+4,Hired Claw,Creature,rare,False,1,2,,0,0,0,1,0,0
+5,Howlsquad Heavy,Creature,rare,False,2,3,2,0,0,0,1,0,2
+6,Kavaron Harrier,Artifact Creature,uncommon,False,2,1,,0,0,0,1,0,0
+7,"Kellan, Planar Trailblazer",Creature,rare,True,2,1,,0,0,0,1,0,0
+8,"Norin, Swift Survivalist",Creature,uncommon,True,2,1,,0,0,0,1,0,0
+9,Nova Hellkite,Creature,rare,False,4,5,3,0,0,0,2,0,3
+10,Tersa Lightshatter,Creature,rare,True,3,3,1,0,0,0,1,0,2
+11,Burst Lightning,Instant,common,False,,,1,0,0,0,1,0,0
+12,Lightning Strike,Instant,common,False,,,,0,0,0,1,0,1
+13,Shock,Instant,common,False,,,,0,0,0,1,0,0
+14,Ghost Vacuum,Artifact,rare,False,,,,0,0,0,0,0,1
+15,Scorching Shot,Sorcery,uncommon,False,,,,0,0,0,2,0,0
+16,Sear,Instant,uncommon,False,,,,0,0,0,1,0,1
+17,Stingerback Terror,Creature,rare,False,7,7,3,0,0,0,2,0,2
+18,Sunspine Lynx,Creature,rare,False,5,4,,0,0,0,2,0,2
+19,Thunder Magic,Instant,common,False,,,4,0,0,0,1,0,0
+20,Agna Qel'a,Land,rare,False,,,,0,1,0,0,0,0
+21,Botanical Sanctum,Land,rare,False,,,,0,1,0,0,1,0
+22,Breeding Pool,Land,rare,False,,,,0,1,0,0,1,0
+23,Forest,Land,common,False,,,,0,0,0,0,1,0
+24,Multiversal Passage,Land,rare,False,,,,0,0,0,0,0,0
+25,Willowrush Verge,Land,rare,False,,,,0,1,0,0,1,0
+26,Badgermole Cub,Creature,mythic,False,2,2,1,0,0,0,0,1,1
+27,Craterhoof Behemoth,Creature,mythic,False,5,5,1,0,0,0,0,3,5
+28,Gene Pollinator,Artifact Creature,common,False,1,2,,0,0,0,0,1,0
+29,Keen-Eyed Curator,Creature,rare,False,3,3,,0,0,0,0,2,0
+30,Llanowar Elves,Creature,common,False,1,1,,0,0,0,0,1,0
+31,Mockingbird,Creature,rare,False,1,1,1,0,1,0,0,0,1
+32,Ouroboroid,Creature,mythic,False,1,3,,0,0,0,0,2,2
+33,Quantum Riddler,Creature,mythic,False,4,6,2,0,2,0,0,0,3
+34,Spider Manifestation,Creature,common,False,2,2,1,0,0,0,0,0,1
+35,"Surrak, Elusive Hunter",Creature,rare,True,4,3,1,0,0,0,0,1,2
+36,Wistfulness,Creature,mythic,False,6,5,1,0,0,0,0,0,3
+37,Bushwhack,Sorcery,common,False,,,1,0,0,0,0,1,0
+38,Nature's Rhythm,Sorcery,rare,False,,,1,0,0,0,0,2,1
+39,Spider-Sense,Instant,rare,False,,,1,0,1,0,0,0,1
+40,Stock Up,Sorcery,uncommon,False,,,,0,1,0,0,0,2
+41,Disdainful Stroke,Instant,uncommon,False,,,,0,1,0,0,0,1
+42,Glen Elendra Guardian,Creature,rare,False,3,4,2,0,1,0,0,0,2
+43,Meltstrider's Resolve,Enchantment,uncommon,False,,,2,0,0,0,0,1,0
+44,"Oko, Lorwyn Liege",Planeswalker,mythic,True,,,2,0,1,0,0,0,2
+45,Origin of Metalbending,Instant,common,False,,,,0,0,0,0,1,1
+46,Soul-Guide Lantern,Artifact,uncommon,False,,,,0,0,0,0,0,1
+47,Tishana's Tidebinder,Creature,rare,False,3,2,1,0,1,0,0,0,2
+48,Unable to Scream,Enchantment,common,False,,,1,0,1,0,0,0,0
+49,Island,Land,common,False,,,,0,1,0,0,0,0
+50,Riverpyre Verge,Land,rare,False,,,,0,1,0,1,0,0
+51,Spirebluff Canal,Land,rare,False,,,,0,1,0,1,0,0
+52,Steam Vents,Land,rare,False,,,,0,1,0,1,0,0
+53,Steam Vents,Land,rare,False,,,,0,1,0,1,0,0
+54,Elusive Otter,Creature,rare,False,1,1,1,0,1,0,0,0,0
+55,Slickshot Show-Off,Creature,rare,False,1,2,3,0,0,0,1,0,1
+56,Boomerang Basics,Sorcery,uncommon,False,,,,0,1,0,0,0,0
+57,Bounce Off,Instant,common,False,,,,0,1,0,0,0,0
+58,Into the Flood Maw,Instant,uncommon,False,,,1,0,1,0,0,0,0
+59,Opt,Instant,common,False,,,1,0,1,0,0,0,0
+60,Secret Identity,Instant,uncommon,False,,,,0,1,0,0,0,0
+61,Sleight of Hand,Sorcery,common,False,,,,0,1,0,0,0,0
+62,Wild Ride,Sorcery,common,False,,,1,0,0,0,1,0,0
+63,Stormchaser's Talent,Enchantment,rare,False,,,,0,1,0,0,0,0
+64,Pyroclasm,Sorcery,uncommon,False,,,,0,0,0,1,0,1
+65,"Ral, Crackling Wit",Planeswalker,mythic,True,,,,0,1,0,1,0,2
+66,Spell Pierce,Instant,uncommon,False,,,,0,1,0,0,0,0
+67,Spell Snare,Instant,uncommon,False,,,,0,1,0,0,0,0
+68,Torch the Tower,Instant,common,False,,,2,0,0,0,1,0,0
+69,Ba Sing Se,Land,rare,False,,,1,0,0,0,0,1,0
+70,Formidable Speaker,Creature,rare,False,2,4,,0,0,0,0,1,2
+71,Archdruid's Charm,Instant,rare,False,,,,0,0,0,0,3,0
+72,Innkeeper's Talent,Enchantment,rare,False,,,,0,0,0,0,1,1
+73,Aetherize,Instant,uncommon,False,,,,0,1,0,0,0,3
+74,Reclamation Sage,Creature,uncommon,False,2,1,,0,0,0,0,1,2
+75,"Sab-Sunen, Luxa Embodied",Creature,mythic,True,6,6,3,0,1,0,0,1,3
+76,Sentinel of Lost Lore,Creature,rare,False,3,4,,0,0,0,0,2,1
+77,Gloomlake Verge,Land,rare,False,,,,0,1,1,0,0,0
+78,Restless Reef,Land,rare,False,,,1,0,1,1,0,0,0
+79,Soulstone Sanctuary,Land,rare,False,,,,0,0,0,0,0,0
+80,Swamp,Land,common,False,,,,0,0,1,0,0,0
+81,Watery Grave,Land,rare,False,,,,0,1,1,0,0,0
+82,"Cecil, Dark Knight",Creature,rare,True,2,3,5,0,0,1,0,0,0
+83,Deep-Cavern Bat,Creature,uncommon,False,1,1,2,0,0,1,0,0,1
+84,Enduring Curiosity,Enchantment Creature,rare,False,4,3,1,0,2,0,0,0,2
+85,Floodpits Drowner,Creature,uncommon,False,2,1,2,0,1,0,0,0,1
+86,Spyglass Siren,Creature,uncommon,False,1,1,2,0,1,0,0,0,0
+87,Faebloom Trick,Instant,uncommon,False,,,,0,1,0,0,0,2
+88,Phantom Interference,Instant,common,False,,,1,0,1,0,0,0,0
+89,Requiting Hex,Instant,uncommon,False,,,1,0,0,1,0,0,0
+90,Shoot the Sheriff,Instant,uncommon,False,,,,0,0,1,0,0,1
+91,Tragic Trajectory,Sorcery,uncommon,False,,,1,0,0,1,0,0,0
+92,"Kaito, Bane of Nightmares",Planeswalker,mythic,True,,,2,0,1,1,0,0,2
+93,Annul,Instant,uncommon,False,,,,0,1,0,0,0,0
+94,Elegy Acolyte,Creature,rare,False,4,4,2,0,0,2,0,0,2
+95,Flashfreeze,Instant,uncommon,False,,,,0,1,0,0,0,1
+96,Negate,Instant,common,False,,,,0,1,0,0,0,1
+97,Strategic Betrayal,Sorcery,uncommon,False,,,,0,0,1,0,0,1
+98,Starting Town,Land,rare,False,,,,0,0,0,0,0,0
+99,Undercity Sewers,Land,rare,False,,,1,0,1,1,0,0,0
+100,Duress,Sorcery,common,False,,,,0,0,1,0,0,0
+101,Pilfer,Sorcery,common,False,,,,0,0,1,0,0,1
+102,Stab,Instant,common,False,,,,0,0,1,0,0,0
+103,Astrologian's Planisphere,Artifact,rare,False,,,2,0,1,0,0,0,1
+104,Black Mage's Rod,Artifact,common,False,,,2,0,0,1,0,0,1
+105,Drake Hatcher,Creature,rare,False,1,3,2,0,1,0,0,0,1
+106,Heritage Reclamation,Instant,common,False,,,,0,0,0,0,1,1
+107,Blazemire Verge,Land,rare,False,,,,0,0,1,1,0,0
+108,Blood Crypt,Land,rare,False,,,,0,0,1,1,0,0
+109,Blood Crypt,Land,rare,False,,,,0,0,1,1,0,0
+110,Bloodghast,Creature,rare,False,2,1,1,0,0,2,0,0,0
+111,Flamewake Phoenix,Creature,rare,False,2,2,3,0,0,0,2,0,1
+112,"Inti, Seneschal of the Sun",Creature,rare,True,2,2,,0,0,0,1,0,1
+113,Iron-Shield Elf,Creature,uncommon,False,3,1,,0,0,1,0,0,1
+114,Marauding Mako,Creature,uncommon,False,1,1,1,0,0,0,1,0,0
+115,Moonshadow,Creature,mythic,False,7,7,1,0,0,1,0,0,0
+116,Bitter Triumph,Instant,uncommon,False,,,,0,0,1,0,0,1
+117,Bloodthorn Flail,Artifact,uncommon,False,,,1,0,0,1,0,0,0
+118,Monument to Endurance,Artifact,rare,False,,,1,0,0,0,0,0,3
+119,Deathmark,Sorcery,uncommon,False,,,,0,0,1,0,0,0
+120,Ill-Timed Explosion,Sorcery,rare,False,,,,0,1,0,1,0,2
+121,Intimidation Tactics,Sorcery,uncommon,False,,,1,0,0,1,0,0,0
+122,Escape Tunnel,Land,common,False,,,,0,0,0,0,0,0
+123,Fabled Passage,Land,rare,False,,,,0,0,0,0,0,0
+124,Promising Vein,Land,common,False,,,,0,0,0,0,0,0
+125,Fecund Greenshell,Creature,rare,False,4,6,1,0,0,0,0,2,3
+126,Icetill Explorer,Creature,rare,False,2,4,2,0,0,0,0,2,2
+127,Mightform Harmonizer,Creature,rare,False,4,4,2,0,0,0,0,2,2
+128,Mossborn Hydra,Creature,rare,False,0,0,2,0,0,0,0,1,2
+129,Sazh's Chocobo,Creature,uncommon,False,0,1,1,0,0,0,0,1,0
+130,Earthbender Ascension,Enchantment,rare,False,,,2,0,0,0,0,1,2
+131,Sapling Nursery,Enchantment,rare,False,,,2,0,0,0,0,2,6
+132,Torpor Orb,Artifact,mythic,False,,,,0,0,0,0,0,2
+133,Thundering Falls,Land,rare,False,,,1,0,1,0,1,0,0
+134,Thundertrap Trainer,Creature,rare,False,1,2,1,0,1,0,0,0,1
+135,Get Out,Instant,uncommon,False,,,,0,2,0,0,0,0
+136,Long River's Pull,Instant,uncommon,False,,,1,0,2,0,0,0,0
+137,Splash Portal,Sorcery,uncommon,False,,,,0,1,0,0,0,0
+138,Frostcliff Siege,Enchantment,rare,False,,,,0,1,0,1,0,1
+139,Roaring Furnace / Steaming Sauna,Enchantment,rare,False,,,1,0,0,0,1,0,1
+140,Abrade,Instant,uncommon,False,,,,0,0,0,1,0,1
+141,"Wan Shi Tong, Librarian",Creature,mythic,True,1,1,3,0,2,0,0,0,1
+142,Elegant Parlor,Land,rare,False,,,1,1,0,0,1,0,0
+143,Floodfarm Verge,Land,rare,False,,,,1,1,0,0,0,0
+144,Godless Shrine,Land,rare,False,,,,1,0,1,0,0,0
+145,Hallowed Fountain,Land,rare,False,,,,1,1,0,0,0,0
+146,Hallowed Fountain,Land,rare,False,,,,1,1,0,0,0,0
+147,Plains,Land,common,False,,,,1,0,0,0,0,0
+148,Restless Anchorage,Land,rare,False,,,,1,1,0,0,0,0
+149,Restless Fortress,Land,rare,False,,,,1,0,1,0,0,0
+150,Sacred Foundry,Land,rare,False,,,,1,0,0,1,0,0
+151,Sunbillow Verge,Land,rare,False,,,,1,0,0,1,0,0
+152,"Aang, Swift Savior",Creature,rare,True,2,3,7,1,1,0,0,0,1
+153,"Ashling, Rekindled",Creature,rare,True,1,3,1,0,0,0,1,0,1
+154,Gwen Stacy,Creature,mythic,True,2,1,4,0,0,0,1,0,1
+155,"Shiko, Paragon of the Way",Creature,mythic,True,4,5,2,1,1,0,1,0,2
+156,Day of Judgment,Sorcery,rare,False,,,,2,0,0,0,0,2
+157,Get Lost,Instant,rare,False,,,1,1,0,0,0,0,1
+158,Inevitable Defeat,Instant,rare,False,,,,1,0,1,1,0,1
+159,Lightning Helix,Instant,uncommon,False,,,,1,0,0,1,0,0
+160,No More Lies,Instant,uncommon,False,,,,1,1,0,0,0,0
+161,Seam Rip,Enchantment,uncommon,False,,,,1,0,0,0,0,0
+162,The Legend of Kuruk,Enchantment,mythic,False,,,4,0,2,0,0,0,2
+163,Doorkeeper Thrull,Creature,rare,False,1,2,2,1,0,0,0,0,1
+164,"Elspeth, Storm Slayer",Planeswalker,mythic,True,,,,2,0,0,0,0,3
+165,Rest in Peace,Enchantment,mythic,False,,,,1,0,0,0,0,1
+166,Voice of Victory,Creature,rare,False,1,3,1,1,0,0,0,0,1
+167,"Bristly Bill, Spine Sower",Creature,mythic,True,2,2,1,0,0,0,0,1,1
+168,Snakeskin Veil,Instant,uncommon,False,,,,0,0,0,0,1,0
+169,Lumbering Worldwagon,Artifact,rare,False,,,1,0,0,0,0,1,2
+170,Pawpatch Formation,Instant,uncommon,False,,,1,0,0,0,0,1,1
+171,Vivien Reid,Planeswalker,mythic,True,,,,0,0,0,0,2,3
+172,Cavern of Souls,Land,mythic,False,,,,0,0,0,0,0,0
+173,Inspiring Vantage,Land,rare,False,,,,1,0,0,1,0,0
+174,Maelstrom of the Spirit Dragon,Land,rare,False,,,,0,0,0,0,0,0
+175,Clarion Conqueror,Creature,rare,False,3,3,1,1,0,0,0,0,2
+176,Clarion Conqueror,Creature,rare,False,3,3,1,1,0,0,0,0,2
+177,"Dragonhawk, Fate's Tempest",Creature,mythic,True,5,5,1,0,0,0,2,0,3
+178,Magmatic Hellkite,Creature,rare,False,4,5,1,0,0,0,2,0,2
+179,Magmatic Hellkite,Creature,rare,False,4,5,1,0,0,0,2,0,2
+180,"Momo, Friendly Flier",Creature,rare,True,1,1,1,1,0,0,0,0,0
+181,"Sarkhan, Dragon Ascendant",Creature,rare,True,2,2,2,0,0,0,1,0,1
+182,Twinmaw Stormbrood,Creature,uncommon,False,5,4,1,1,0,0,0,0,5
+183,The Legend of Roku,Enchantment,mythic,False,,,2,0,0,0,2,0,2
+184,"Chandra, Spark Hunter",Planeswalker,mythic,True,,,,0,0,0,1,0,3
+185,Exorcise,Sorcery,uncommon,False,,,,1,0,0,0,0,1
+186,Fire Magic,Instant,uncommon,False,,,4,0,0,0,1,0,0
+187,High Noon,Enchantment,rare,False,,,,1,0,0,0,0,1
+188,Gran-Gran,Creature,uncommon,True,1,2,,0,1,0,0,0,0
+189,Abandon Attachments,Instant,common,False,,,,0,0,0,0,0,1
+190,Accumulate Wisdom,Instant,uncommon,False,,,,0,1,0,0,0,1
+191,Combustion Technique,Instant,uncommon,False,,,,0,0,0,1,0,1
+192,Firebending Lesson,Instant,common,False,,,1,0,0,0,1,0,0
+193,It'll Quench Ya!,Instant,common,False,,,,0,1,0,0,0,1
+194,Artist's Talent,Enchantment,rare,False,,,,0,0,0,1,0,1
+195,Slagstorm,Sorcery,rare,False,,,,0,0,0,2,0,1
+196,Hexing Squelcher,Creature,rare,False,2,2,1,0,0,0,1,0,1
+197,"Zhao, the Moon Slayer",Creature,rare,True,2,2,1,0,0,0,1,0,1
+198,Magebane Lizard,Creature,uncommon,False,1,4,,0,0,0,1,0,1
+199,Twisted Fealty,Sorcery,uncommon,False,,,1,0,0,0,1,0,2
+200,Fountainport,Land,rare,False,,,1,0,0,0,0,0,0
+201,Meticulous Archive,Land,rare,False,,,1,1,1,0,0,0,0
+202,Sunken Citadel,Land,rare,False,,,,0,0,0,0,0,0
+203,Enduring Innocence,Enchantment Creature,rare,False,2,1,1,2,0,0,0,0,1
+204,Overlord of the Mistmoors,Enchantment Creature,mythic,False,6,6,1,2,0,0,0,0,5
+205,Consult the Star Charts,Instant,rare,False,,,1,0,1,0,0,0,1
+206,Aang's Iceberg,Enchantment,rare,False,,,3,1,0,0,0,0,2
+207,"Ajani, Outland Chaperone",Planeswalker,mythic,True,,,,2,0,0,0,0,1
+208,Authority of the Consuls,Enchantment,rare,False,,,,1,0,0,0,0,0
+209,Dawn's Truce,Instant,rare,False,,,1,1,0,0,0,0,1
+210,Cori Mountain Monastery,Land,rare,False,,,,0,0,0,1,0,0
+211,Pit of Offerings,Land,uncommon,False,,,,0,0,0,0,0,0
+212,Secluded Courtyard,Land,uncommon,False,,,,0,0,0,0,0,0
+213,Deceit,Creature,mythic,False,5,5,1,0,0,0,0,0,4
+214,Flamebraider,Creature,uncommon,False,2,2,,0,0,0,1,0,1
+215,Roaming Throne,Artifact Creature,rare,False,4,4,1,0,0,0,0,0,4
+216,Sunderflock,Creature,rare,False,5,5,1,0,2,0,0,0,7
+217,Superior Spider-Man,Creature,rare,True,4,4,,0,1,1,0,0,2
+218,Vibrance,Creature,mythic,False,4,4,1,0,0,0,0,0,3
+219,"Ygra, Eater of All",Creature,mythic,True,6,6,1,0,0,1,0,1,3
+220,Ashling's Command,Kindred Instant,rare,False,,,1,0,1,0,1,0,3
+221,Winternight Stories,Sorcery,rare,False,,,1,0,1,0,0,0,2
+222,Essence Scatter,Instant,uncommon,False,,,,0,1,0,0,0,1
+223,Day of Black Sun,Sorcery,rare,False,,,,0,0,2,0,0,1
+224,The End,Instant,rare,False,,,,0,0,2,0,0,2
+225,The Unagi of Kyoshi Island,Creature,rare,True,5,5,3,0,2,0,0,0,3
+226,Iroh's Demonstration,Sorcery,uncommon,False,,,,0,0,0,1,0,1
+227,Three Steps Ahead,Instant,rare,False,,,1,0,1,0,0,0,0
+228,Mistrise Village,Land,rare,False,,,,0,1,0,0,0,0
+229,Marang River Regent,Creature,rare,False,6,7,1,0,2,0,0,0,4
+230,Marang River Regent,Creature,rare,False,6,7,1,0,2,0,0,0,4
+231,Jeskai Revelation,Instant,mythic,False,,,,1,1,0,1,0,4
+232,Crystal Barricade,Artifact Creature,rare,False,0,4,1,1,0,0,0,0,1
+233,Kutzil's Flanker,Creature,rare,False,3,1,2,1,0,0,0,0,2
+234,Sphinx of the Final Word,Creature,mythic,False,5,5,2,0,2,0,0,0,5
+235,Ultima,Sorcery,rare,False,,,,2,0,0,0,0,3
+236,Fear of Missing Out,Enchantment Creature,rare,False,2,3,1,0,0,0,1,0,1
+237,Case of the Crimson Pulse,Enchantment,rare,False,,,1,0,0,0,1,0,2
+238,Leyline of the Void,Enchantment,rare,False,,,,0,0,2,0,0,2
+239,Molten Collapse,Sorcery,rare,False,,,,0,0,1,1,0,0
+240,Champion of the Weird,Creature,rare,False,5,5,2,0,0,1,0,0,3
+241,Explosive Prodigy,Creature,uncommon,False,1,1,1,0,0,0,1,0,1
+242,Shimmerwilds Growth,Enchantment,uncommon,False,,,1,0,0,0,0,1,1
+243,Doomsday Excruciator,Creature,rare,False,6,6,1,0,0,6,0,0,0
+244,Harvester of Misery,Creature,mythic,False,5,4,1,0,0,2,0,0,3
+245,Archenemy's Charm,Instant,rare,False,,,,0,0,3,0,0,0
+246,Deadly Cover-Up,Sorcery,rare,False,,,1,0,0,2,0,0,3
+247,Insatiable Avarice,Sorcery,rare,False,,,1,0,0,1,0,0,0
+248,Cruelclaw's Heist,Sorcery,rare,False,,,1,0,0,2,0,0,0
+249,Outrageous Robbery,Instant,rare,False,,,,0,0,2,0,0,1
+250,Riverchurn Monument,Artifact,rare,False,,,2,0,1,0,0,0,1
+251,"Black Cat, Cunning Thief",Creature,rare,True,2,3,,0,0,2,0,0,3
+252,Thornspire Verge,Land,rare,False,,,,0,0,0,1,1,0
+253,"Sandman, Shifting Scoundrel",Creature,rare,True,*,*,,0,0,0,0,2,1
+254,Analyze the Pollen,Sorcery,rare,False,,,1,0,0,0,0,1,0
+255,Broadside Barrage,Instant,uncommon,False,,,,0,1,0,1,0,1
+256,Full Bore,Instant,uncommon,False,,,,0,0,0,1,0,0
+257,Songcrafter Mage,Creature,rare,False,3,2,1,0,1,0,1,1,0
+258,Esper Origins,Sorcery,rare,False,,,3,0,0,0,0,1,1
+259,Seedship Impact,Instant,uncommon,False,,,,0,0,0,0,1,1
+260,Restless Vinestalk,Land,rare,False,,,,0,1,0,0,1,0
+261,Stomping Ground,Land,rare,False,,,,0,0,0,1,1,0
+262,Overlord of the Boilerbilges,Enchantment Creature,mythic,False,5,5,1,0,0,0,2,0,4
+263,Break Out,Sorcery,uncommon,False,,,,0,0,0,1,1,0
+264,Mirrorform,Instant,mythic,False,,,,0,2,0,0,0,4
+265,Hushwood Verge,Land,rare,False,,,,1,0,0,0,1,0
+266,Temple Garden,Land,rare,False,,,,1,0,0,0,1,0
+267,Temple Garden,Land,rare,False,,,,1,0,0,0,1,0
+268,"Aang, at the Crossroads",Creature,rare,True,3,3,3,1,1,0,0,1,2
+269,"Appa, Steadfast Guardian",Creature,mythic,True,3,4,3,2,0,0,0,0,2
+270,Bramble Familiar,Creature,rare,False,2,2,1,0,0,0,0,1,1
+271,"Doc Aurlock, Grizzled Genius",Creature,uncommon,True,2,3,,0,1,0,0,1,0
+272,Airbender Ascension,Enchantment,rare,False,,,1,1,0,0,0,0,1
+273,Interdimensional Web Watch,Artifact,rare,False,,,,0,0,0,0,0,4
+274,Avatar's Wrath,Sorcery,rare,False,,,1,2,0,0,0,0,2
+275,Aven Interrupter,Creature,rare,False,2,2,3,2,0,0,0,0,1
+276,"Beza, the Bounding Spring",Creature,mythic,True,4,5,1,2,0,0,0,0,2
+277,Bovine Intervention,Instant,uncommon,False,,,,1,0,0,0,0,1
+278,Cathar Commando,Creature,common,False,3,1,1,1,0,0,0,0,1
+279,Razorkin Needlehead,Creature,rare,False,2,2,,0,0,0,2,0,0
+280,Fiery Annihilation,Instant,uncommon,False,,,,0,0,0,1,0,2
+281,Eclipsed Realms,Land,uncommon,False,,,,0,0,0,0,0,0
+282,Catharsis,Creature,mythic,False,3,4,1,0,0,0,0,0,4
+283,Fresh Start,Enchantment,uncommon,False,,,2,0,1,0,0,0,1
+284,Loch Mare,Creature,mythic,False,4,5,,0,1,0,0,0,1
+285,Abandoned Air Temple,Land,rare,False,,,,1,0,0,0,0,0
+286,Requisition Raid,Sorcery,uncommon,False,,,1,1,0,0,0,0,0
+287,Flitterwing Nuisance,Creature,rare,False,2,2,1,0,1,0,0,0,0
+288,Primal Might,Sorcery,rare,False,,,1,0,0,0,0,1,1
+289,Scrapshooter,Creature,rare,False,4,4,2,0,0,0,0,2,1
+290,Cruel Somnophage,Creature,rare,False,*,*,1,0,0,1,0,0,1
+291,"Emet-Selch, Unsundered",Creature,mythic,True,2,4,3,0,1,1,0,0,1
+292,Overlord of the Balemurk,Enchantment Creature,mythic,False,5,5,2,0,0,2,0,0,3
+293,Preacher of the Schism,Creature,rare,False,2,4,1,0,0,1,0,0,2
+294,Blooming Marsh,Land,rare,False,,,,0,0,1,0,1,0
+295,Overgrown Tomb,Land,rare,False,,,,0,0,1,0,1,0
+296,Overgrown Tomb,Land,rare,False,,,,0,0,1,0,1,0
+297,Underground Mortuary,Land,rare,False,,,1,0,0,1,0,1,0
+298,"Ardyn, the Usurper",Creature,rare,True,4,4,1,0,0,3,0,0,5
+299,Bringer of the Last Gift,Creature,rare,False,6,6,1,0,0,2,0,0,6
+300,Terror of the Peaks,Creature,mythic,False,5,4,1,0,0,0,2,0,3
+301,Awaken the Honored Dead,Enchantment,rare,False,,,1,0,1,1,0,1,0
+302,Urgent Necropsy,Instant,mythic,False,,,,0,0,1,0,1,2
+303,Noggle the Mind,Enchantment,uncommon,False,,,2,0,1,0,0,0,1
+304,Valley Floodcaller,Creature,rare,False,2,2,1,0,1,0,0,0,2
+305,Sygg's Command,Kindred Sorcery,rare,False,,,,1,1,0,0,0,1
+306,Firdoch Core,Kindred Artifact,common,False,,,1,0,0,0,0,0,3
+307,Roiling Dragonstorm,Enchantment,uncommon,False,,,,0,1,0,0,0,1
+308,Split Up,Sorcery,rare,False,,,,2,0,0,0,0,1
+309,Realm of Koh,Land,rare,False,,,,0,0,1,0,0,0
+310,Bloodletter of Aclazotz,Creature,mythic,False,2,4,1,0,0,3,0,0,1
+311,Unstoppable Slasher,Creature,rare,False,2,3,1,0,0,1,0,0,2
+312,Unholy Annex / Ritual Chamber,Enchantment,rare,False,,,1,0,0,1,0,0,2
+313,Bleachbone Verge,Land,rare,False,,,,1,0,1,0,0,0
+314,Hedge Maze,Land,rare,False,,,1,0,1,0,0,1,0
+315,Lush Portico,Land,rare,False,,,1,1,0,0,0,1,0
+316,Herald of Eternal Dawn,Creature,mythic,False,6,6,2,3,0,0,0,0,4
+317,Perennation,Sorcery,mythic,False,,,,1,0,1,0,1,3
+318,Ancient Cornucopia,Artifact,mythic,False,,,,0,0,0,0,1,2
+319,Cursed Recording,Artifact,rare,False,,,,0,0,0,2,0,2
+320,Glen Elendra's Answer,Instant,mythic,False,,,,0,2,0,0,0,2
+321,Maelstrom Pulse,Sorcery,rare,False,,,,0,0,1,0,1,1
+322,Summon: Leviathan,Enchantment Creature,rare,False,6,6,1,0,2,0,0,0,4
+323,Shared Roots,Sorcery,uncommon,False,,,,0,0,0,0,1,1
+324,Parting Gust,Instant,uncommon,False,,,1,2,0,0,0,0,0
+325,Callous Sell-Sword,Creature,uncommon,False,2,2,,0,0,1,0,0,1
+326,Emberheart Challenger,Creature,rare,False,2,2,3,0,0,0,1,0,1
+327,Stadium Headliner,Creature,rare,False,1,1,1,0,0,0,1,0,0
+328,Blossoming Defense,Instant,uncommon,False,,,,0,0,0,0,1,0
+329,Desperate Measures,Instant,uncommon,False,,,,0,0,1,0,0,0
+330,Heartless Act,Instant,uncommon,False,,,,0,0,1,0,0,1
+331,Overprotect,Instant,uncommon,False,,,,0,0,0,0,1,1
+332,Turn Inside Out,Instant,common,False,,,2,0,0,0,1,0,0
+333,Leyline of Resonance,Enchantment,rare,False,,,,0,0,0,2,0,2
+334,Eddymurk Crab,Creature,uncommon,False,5,5,1,0,2,0,0,0,5
+335,Hearth Elemental,Creature,uncommon,False,4,5,,0,0,0,1,0,5
+336,Glacial Dragonhunt,Sorcery,uncommon,False,,,1,0,1,0,1,0,0
+337,"Hydro-Man, Fluid Felon",Creature,rare,True,2,2,,0,2,0,0,0,0
+338,"Lord Skitter, Sewer King",Creature,rare,True,3,3,,0,0,1,0,0,2
+339,Spell Stutter,Instant,common,False,,,,0,1,0,0,0,1
+340,Demolition Field,Land,uncommon,False,,,,0,0,0,0,0,0
+341,Disruptive Stormbrood,Creature,uncommon,False,3,3,1,0,0,0,0,1,4
+342,Scavenger Regent,Creature,rare,False,4,4,2,0,0,1,0,0,3
+343,Scavenger Regent,Creature,rare,False,4,4,2,0,0,1,0,0,3
+344,Caustic Exhale,Instant,common,False,,,1,0,0,1,0,0,0
+345,Dispelling Exhale,Instant,common,False,,,1,0,1,0,0,0,1
+346,Evolving Wilds,Land,common,False,,,,0,0,0,0,0,0
+347,Tifa Lockhart,Creature,rare,True,1,2,2,0,0,0,0,1,1
+348,Royal Treatment,Instant,uncommon,False,,,1,0,0,0,0,1,0
+349,Pick Your Poison,Sorcery,common,False,,,,0,0,0,0,1,0
+350,Frenzied Baloth,Creature,rare,False,3,2,2,0,0,0,0,2,0
+351,Hemosymbic Mite,Creature,uncommon,False,1,1,,0,0,0,0,1,0
+352,Kinscaer Sentry,Creature,rare,False,2,2,2,1,0,0,0,0,1
+353,Lightstall Inquisitor,Creature,rare,False,2,1,1,1,0,0,0,0,0
+354,Pawpatch Recruit,Creature,rare,False,2,1,2,0,0,0,0,1,0
+355,Scout for Survivors,Sorcery,uncommon,False,,,,1,0,0,0,0,2
+356,Sheltered by Ghosts,Enchantment,uncommon,False,,,1,1,0,0,0,0,1
+357,Skyward Spider,Creature,common,False,2,2,1,0,0,0,0,0,0
+358,Spectacular Spider-Man,Creature,rare,True,3,2,1,1,0,0,0,0,1
+359,Untimely Malfunction,Instant,uncommon,False,,,,0,0,0,1,0,1
+360,Wear Down,Sorcery,uncommon,False,,,1,0,0,0,0,1,1
+361,Azure Beastbinder,Creature,rare,False,1,3,1,0,1,0,0,0,1
+362,Unsummon,Instant,common,False,,,,0,1,0,0,0,0
+363,"Eirdu, Carrier of Dawn",Creature,mythic,True,5,5,3,2,0,0,0,0,3
+364,Figure of Fable,Creature,rare,False,1,1,,0,0,0,0,0,0
+365,Overwhelming Surge,Instant,uncommon,False,,,,0,0,0,1,0,2
+366,Pyrrhic Strike,Instant,uncommon,False,,,1,1,0,0,0,0,2
+367,Sage of the Skies,Creature,rare,False,2,3,2,1,0,0,0,0,2
+368,Cryptic Caves,Land,uncommon,False,,,,0,0,0,0,0,0
+369,"Ojer Axonil, Deepest Might",Creature,mythic,True,4,4,2,0,0,0,2,0,2
+370,Cut Propulsion,Instant,uncommon,False,,,,0,0,0,1,0,2
+371,Spectacular Tactics,Instant,common,False,,,,1,0,0,0,0,1
+372,Wastewood Verge,Land,rare,False,,,,0,0,1,0,1,0
+373,Oblivious Bookworm,Creature,uncommon,False,2,3,,0,1,0,0,1,0
+374,"Glarb, Calamity's Augur",Creature,mythic,True,2,4,2,0,1,1,0,1,0
+375,Zero Point Ballad,Sorcery,rare,False,,,,0,0,1,0,0,1
+376,Repulsive Mutation,Instant,uncommon,False,,,,0,1,0,0,1,1
+377,Longstalk Brawl,Sorcery,common,False,,,2,0,0,0,0,1,0
+378,Witchstalker Frenzy,Instant,uncommon,False,,,,0,0,0,1,0,3
+379,Hunter's Talent,Enchantment,uncommon,False,,,,0,0,0,0,1,1
+380,Plumecreed Escort,Creature,uncommon,False,2,1,2,0,1,0,0,0,1
+381,Twinflame Travelers,Creature,uncommon,False,3,3,1,0,1,0,1,0,2
+382,Malboro,Creature,common,False,4,4,5,0,0,2,0,0,4
+383,Dauntless Scrapbot,Artifact Creature,uncommon,False,3,1,,0,0,0,0,0,3
+384,"Malcolm, Alluring Scoundrel",Creature,rare,True,2,1,2,0,1,0,0,0,1
+385,"Kaito, Cunning Infiltrator",Planeswalker,mythic,True,,,,0,2,0,0,0,1
+386,Heroes' Hangout,Sorcery,uncommon,False,,,,0,0,0,1,0,0
+387,Magic Damper,Instant,common,False,,,,0,1,0,0,0,0
+388,Glimpse the Core,Sorcery,uncommon,False,,,,0,0,0,0,1,1
+389,Hide on the Ceiling,Instant,rare,False,,,,0,1,0,0,0,1
+390,Great Divide Guide,Creature,rare,False,2,3,,0,0,0,0,1,1
+391,"Lizard, Connors's Curse",Creature,rare,True,5,5,1,0,0,0,0,2,2
+392,Chomping Changeling,Creature,uncommon,False,1,2,1,0,0,0,0,1,2
+393,Insidious Fungus,Creature,uncommon,False,1,2,,0,0,0,0,1,0
+394,Qarsi Revenant,Creature,rare,False,3,3,4,0,0,2,0,0,1
+395,Dredger's Insight,Enchantment,uncommon,False,,,1,0,0,0,0,1,1
+396,Myojin of Night's Reach,Creature,rare,True,5,2,,0,0,3,0,0,5
+397,Price of Freedom,Sorcery,uncommon,False,,,,0,0,0,1,0,1
+398,Bitterbloom Bearer,Creature,mythic,False,1,1,2,0,0,2,0,0,0
+399,Disruptor of Currents,Creature,rare,False,3,3,2,0,2,0,0,0,3
+400,"Sygg, Wanderwine Wisdom",Creature,rare,True,2,2,1,0,1,0,0,0,1
+401,The Soul Stone,Artifact,mythic,True,,,1,0,0,1,0,0,1
+402,Crash Through,Sorcery,common,False,,,,0,0,0,1,0,0
+403,Oildeep Gearhulk,Artifact Creature,mythic,False,4,4,2,0,2,2,0,0,0
+404,Outcaster Trailblazer,Creature,rare,False,4,2,1,0,0,0,0,1,2
+405,Railway Brawler,Creature,mythic,False,5,5,3,0,0,0,0,2,3
+406,Temur Battlecrier,Creature,rare,False,4,3,,0,1,0,1,1,0
+407,Devastating Onslaught,Sorcery,mythic,False,,,,0,0,0,1,0,2
+408,Smuggler's Surprise,Instant,rare,False,,,2,0,0,0,0,1,0
+409,Cease / Desist,Enchantment,rare,False,,,1,0,0,1,0,1,4
+410,Spectral Denial,Instant,uncommon,False,,,,0,1,0,0,0,1
+411,"Lightning, Army of One",Creature,mythic,True,3,2,4,1,0,0,1,0,1
+412,Veteran Survivor,Creature,uncommon,False,2,1,1,1,0,0,0,0,0
+413,Boros Charm,Instant,uncommon,False,,,,1,0,0,1,0,0
+414,Imodane's Recruiter,Creature,uncommon,False,2,2,,0,0,0,1,0,2
+415,Mutable Explorer,Creature,rare,False,1,1,1,0,0,0,0,1,2
+416,Visage Bandit,Creature,uncommon,False,2,2,1,0,1,0,0,0,3
+417,Celestial Reunion,Sorcery,mythic,False,,,1,0,0,0,0,1,1
+418,Fanatical Firebrand,Creature,common,False,1,1,1,0,0,0,1,0,0
+419,Scalding Viper,Creature,rare,False,2,1,,0,0,0,1,0,1
+420,Boulder Dash,Sorcery,uncommon,False,,,,0,0,0,1,0,1
+421,Feed the Swarm,Sorcery,common,False,,,,0,0,1,0,0,1
+422,Rally the Monastery,Instant,uncommon,False,,,,1,0,0,0,0,3
+423,Dreadmaw's Ire,Instant,uncommon,False,,,,0,0,0,1,0,0
+424,Restless Vents,Land,rare,False,,,,0,0,1,1,0,0
+425,"Morlun, Devourer of Spiders",Creature,rare,True,2,1,1,0,0,2,0,0,1
+426,Rush of Dread,Sorcery,rare,False,,,1,0,0,2,0,0,1
+427,Withering Torment,Instant,uncommon,False,,,,0,0,1,0,0,2
+428,Traveling Chocobo,Creature,mythic,False,3,2,,0,0,0,0,1,2
+429,Brightglass Gearhulk,Artifact Creature,mythic,False,4,4,2,2,0,0,0,2,0
+430,Herd Heirloom,Artifact,rare,False,,,,0,0,0,0,1,1
+431,Cinder Strike,Sorcery,common,False,,,1,0,0,0,1,0,0
+432,Doc Ock's Tentacles,Artifact,rare,False,,,1,0,0,0,0,0,1
+433,Concealed Courtyard,Land,rare,False,,,,1,0,1,0,0,0
+434,Shadowy Backstreet,Land,rare,False,,,1,1,0,1,0,0,0
+435,Soul Search,Sorcery,uncommon,False,,,,1,0,1,0,0,0
+436,Caretaker's Talent,Enchantment,rare,False,,,,1,0,0,0,0,2
+437,Carrot Cake,Artifact,common,False,,,1,1,0,0,0,0,1
+438,"Kaya, Spirits' Justice",Planeswalker,mythic,True,,,1,1,0,1,0,0,2
+439,Glamer Gifter,Creature,uncommon,False,1,2,2,0,1,0,0,0,1
+440,"Mai, Scornful Striker",Creature,rare,True,2,2,1,0,0,1,0,0,1
+441,"Vren, the Relentless",Creature,rare,True,3,4,1,0,1,1,0,0,2
+442,Mystic Monastery,Land,uncommon,False,,,,1,1,0,1,0,0
+443,"Balmor, Battlemage Captain",Creature,uncommon,True,1,3,1,0,1,0,1,0,0
+444,Cosmogrand Zenith,Creature,mythic,False,2,4,,1,0,0,0,0,2
+445,"Delney, Streetwise Lookout",Creature,mythic,True,2,2,,1,0,0,0,0,2
+446,The Dominion Bracelet,Artifact,mythic,True,,,1,0,0,0,0,0,2
+447,"Carnage, Crimson Chaos",Creature,rare,True,4,3,2,0,0,1,1,0,2
+448,Vengeful Possession,Sorcery,uncommon,False,,,,0,0,0,1,0,2
+449,Entropic Battlecruiser,Artifact,rare,False,,,1,0,0,1,0,0,3
+450,Opulent Palace,Land,uncommon,False,,,,0,1,1,0,1,0
+451,Restless Cottage,Land,rare,False,,,1,0,0,1,0,1,0
+452,Undying Malice,Instant,common,False,,,,0,0,1,0,0,0
+453,Personify,Instant,uncommon,False,,,,1,0,0,0,0,1
+454,Virtue of Loyalty,Enchantment,mythic,False,,,,2,0,0,0,0,3
+455,Faerie Dreamthief,Creature,uncommon,False,1,1,2,0,0,1,0,0,0
+456,Nowhere to Run,Enchantment,uncommon,False,,,1,0,0,1,0,0,1
+457,Malicious Eclipse,Sorcery,uncommon,False,,,,0,0,2,0,0,1
+458,Stoic Sphinx,Creature,rare,False,5,3,2,0,2,0,0,0,2
+459,Duelist of the Mind,Creature,rare,False,*,3,2,0,1,0,0,0,1
+460,Tiger-Seal,Creature,rare,False,3,3,1,0,1,0,0,0,0
+461,Scar,,,False,,,,,,,,,
+462,Famished Worldsire,Creature,mythic,False,0,0,2,0,0,0,0,3,5
+463,"Ojer Kaslem, Deepest Growth",Creature,mythic,True,6,5,2,0,0,0,0,2,3
+464,Giant Growth,Instant,common,False,,,,0,0,0,0,1,0
+465,Aloe Alchemist,Creature,uncommon,False,3,2,2,0,0,0,0,1,1
+466,Questing Druid,Creature,rare,False,1,1,,0,0,0,0,1,1
+467,Opera Love Song,Instant,uncommon,False,,,,0,0,0,1,0,1
+468,Midnight Tilling,Instant,common,False,,,1,0,0,0,0,1,1
